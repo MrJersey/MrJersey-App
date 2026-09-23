@@ -1,0 +1,28 @@
+BASE Creator System
+
+Product Name:
+BASE Tier 2 Creator Template v1
+
+Product Version:
+1.0.0
+
+Product Status:
+Frozen Production Release
+
+System:
+BASE Creator System
+
+Repository:
+BASE Creator Land
+
+Deployment Type:
+Creator Deployment
+
+Release Stage:
+Tier 2
+
+Purpose:
+Official production release of the BASE Tier 2 Creator Template v1 for building independent Creator Deployments.
+
+Notes:
+Future releases of the BASE Tier 2 Creator Template will receive new version identifiers while existing Creator Deployments may continue operating on previous production releases, preserving compatibility whenever practical within the continued evolution of the BASE Creator System.

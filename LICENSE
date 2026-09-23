@@ -1,0 +1,230 @@
+# BASE Tier 2 Creator Template v1
+
+## Proprietary Software License
+
+Copyright © 2026 William Smith McClinton.
+All Rights Reserved.
+
+---
+
+## 1. License Grant
+
+The BASE Tier 2 Creator Template v1 ("Tier 2 Software") is proprietary software and is **licensed, not sold**.
+
+Subject to this License, the Licensee is granted a limited, non-exclusive, non-transferable, non-sublicensable license to use one licensed copy of the Tier 2 Software for its intended purpose: configuring, customizing, deploying, operating, and maintaining an authorized Creator Deployment.
+
+This License grants permission to use the Tier 2 Software only as expressly stated in this License.
+
+It does not transfer ownership of the Tier 2 Software or any associated intellectual property.
+
+No rights are granted except those expressly provided by this License.
+
+---
+
+## 2. Ownership
+
+The BASE Tier 2 Creator Template v1, including its proprietary software, source code, features, architecture, configuration structure, publishing workflow, deployment workflow, documentation, design, and associated intellectual property, remains the property of William Smith McClinton except for third-party materials or components subject to their own rights or licenses.
+
+Nothing in this License transfers ownership of the BASE Tier 2 Creator Template v1 to the Licensee.
+
+Possession of the source files, deployment files, Creator Dashboard, Fan App, or any other component of the Tier 2 Software does not constitute a transfer of ownership.
+
+Ownership may be transferred only through a separate written legal agreement expressly providing for such a transfer.
+
+---
+
+## 3. Permitted Use
+
+Subject to this License, the Licensee may:
+
+* Install and use the licensed Tier 2 Software.
+
+* Configure the Tier 2 Software for an authorized Creator Deployment.
+
+* Customize creator identity, creator branding, creator content, creator media, creator links, creator communications, appearance, and deployment configuration.
+
+* Configure compatible repository and hosting information required for the Creator Deployment.
+
+* Publish and operate the authorized Creator Deployment.
+
+* Maintain the authorized Creator Deployment.
+
+* Deploy the Creator Deployment using compatible hosting environments.
+
+* Move the Creator Deployment between compatible hosting providers or deployment environments.
+
+* Connect compatible third-party services selected by the creator or Licensee.
+
+Customization permitted under this section is limited to configuring and operating the Tier 2 Software for its intended Creator Deployment.
+
+Permission to customize a Creator Deployment does not grant permission to create, extract, develop, or distribute a separate software system, template, framework, product, or service from the Tier 2 Software.
+
+---
+
+## 4. Restrictions
+
+Unless expressly authorized in writing by William Smith McClinton, the Licensee may not:
+
+* Redistribute the BASE Tier 2 Creator Template v1.
+
+* Sell, resell, rent, lease, lend, sublicense, transfer, or otherwise provide the Tier 2 Software itself to another person or entity.
+
+* Copy the Tier 2 Software for the purpose of creating unauthorized additional licensed deployments.
+
+* Repackage the Tier 2 Software as another software product, template, framework, system, platform, or service.
+
+* Use the Tier 2 Software, its proprietary components, or its proprietary source code as the foundation for another software product, creator system, template, framework, platform, or commercial software offering.
+
+* Create or distribute a competing commercial creator system derived from the Tier 2 Software.
+
+* Extract proprietary Tier 2 components for reuse or distribution outside the authorized Creator Deployment.
+
+* Remove, conceal, or alter copyright, ownership, licensing, or proprietary notices contained in the Tier 2 Software.
+
+* Claim authorship, ownership, or original creation of the BASE Tier 2 Creator Template v1.
+
+* Represent themselves as the creator, owner, or licensor of the BASE Tier 2 Creator Template v1.
+
+* Grant another person rights to the Tier 2 Software that the Licensee does not possess under this License.
+
+No permission to modify or customize a Creator Deployment shall be interpreted as permission to redistribute, sublicense, commercialize, or create another software system from the Tier 2 Software.
+
+---
+
+## 5. Creator Deployments
+
+Creator Deployments configured and operated using the BASE Tier 2 Creator Template v1 remain under the control of their respective creators, subject to the software rights retained under this License.
+
+Creators retain ownership of their own:
+
+* Creator identity
+* Creator branding
+* Creator content
+* Creator media
+* Creator communications
+* Creator audience relationships
+* Creator-owned assets and materials
+
+The creator may control the hosting, repository, domain, content, connected services, and deployment environment associated with their Creator Deployment where technically applicable.
+
+Ownership of creator-specific content, branding, assets, or a Creator Deployment does **not** transfer ownership of the underlying BASE Tier 2 Creator Template v1 or grant redistribution, sublicensing, resale, or software-development rights to the Tier 2 Software.
+
+---
+
+## 6. Repository and Hosting Independence
+
+The BASE Tier 2 Creator Template v1 is designed so that repository configuration and public deployment location may be configured independently.
+
+A Creator Deployment may use compatible repositories, hosting providers, private infrastructure, domains, or other compatible deployment environments.
+
+The public location of a Creator Deployment does not itself determine ownership of, or rights to, the repository or Tier 2 Software.
+
+Moving a Creator Deployment between compatible hosting providers, repositories, domains, or deployment environments does not transfer ownership of the Tier 2 Software and does not alter the restrictions of this License.
+
+---
+
+## 7. Third-Party Services
+
+The Tier 2 Software may permit connection to independent third-party services, providers, APIs, hosting environments, communication systems, payment systems, media services, or other external tools.
+
+Those third-party services remain independent from BASE and are governed by their own licenses, terms, policies, availability, and technical requirements.
+
+Nothing in this License grants the Licensee rights to third-party software, services, trademarks, content, or intellectual property.
+
+William Smith McClinton does not control and is not responsible for the continued availability, operation, pricing, policies, security, or performance of third-party services used with a Creator Deployment.
+
+---
+
+## 8. Access Credentials and Deployment Responsibility
+
+The Licensee and creator are responsible for protecting repository credentials, access tokens, hosting credentials, domain credentials, third-party service credentials, and other authentication information used with their Creator Deployment.
+
+The Licensee and creator are responsible for their own deployment configuration, content, connected services, accounts, and infrastructure.
+
+William Smith McClinton is not responsible for unauthorized access, configuration changes, data loss, service interruption, or other consequences resulting from credentials, accounts, infrastructure, or services controlled by the Licensee, creator, hosting provider, repository provider, or other third party.
+
+---
+
+## 9. Updates, Maintenance, and Support
+
+Future versions, upgrades, features, releases, maintenance, support, installation services, customization services, or other services related to the BASE Tier 2 Creator Template may be offered separately.
+
+Purchase or possession of the BASE Tier 2 Creator Template v1 does not guarantee:
+
+* Future versions
+* Future features
+* Upgrades
+* Updates
+* Maintenance
+* Technical support
+* Hosting
+* Deployment services
+* Continued compatibility with third-party services
+
+Any such offering may be governed by separate pricing, terms, licenses, or agreements.
+
+---
+
+## 10. Termination
+
+This License remains effective unless terminated.
+
+The Licensee's rights under this License terminate if the Licensee materially violates its terms.
+
+Upon termination, the Licensee must cease unauthorized use, copying, redistribution, sublicensing, resale, or other prohibited use of the Tier 2 Software.
+
+Termination does not transfer ownership of the Tier 2 Software or eliminate rights and obligations that by their nature are intended to survive termination, including ownership, intellectual-property protections, restrictions on unauthorized redistribution, warranty disclaimers, and limitations of liability.
+
+---
+
+## 11. Disclaimer of Warranties
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE BASE TIER 2 CREATOR TEMPLATE v1 IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED.
+
+THIS INCLUDES, WITHOUT LIMITATION, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, COMPATIBILITY, AVAILABILITY, OR ERROR-FREE OPERATION.
+
+NO WARRANTY IS MADE THAT THE TIER 2 SOFTWARE WILL OPERATE WITHOUT INTERRUPTION, REMAIN COMPATIBLE WITH EVERY DEVICE, BROWSER, HOSTING PROVIDER, REPOSITORY PROVIDER, DOMAIN CONFIGURATION, OR THIRD-PARTY SERVICE, OR MEET EVERY LICENSEE'S PARTICULAR REQUIREMENTS.
+
+Some jurisdictions may not permit the exclusion of certain warranties, so some exclusions may not apply to a particular Licensee.
+
+---
+
+## 12. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, WILLIAM SMITH McCLINTON SHALL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES ARISING FROM OR RELATED TO THE TIER 2 SOFTWARE OR ITS USE.
+
+THIS INCLUDES, WITHOUT LIMITATION, LOSS OF DATA, LOSS OF CONTENT, LOSS OF REVENUE, LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF ACCESS, SERVICE INTERRUPTION, OR FAILURE OF THIRD-PARTY SERVICES OR INFRASTRUCTURE.
+
+Nothing in this License excludes or limits liability where such exclusion or limitation is prohibited by applicable law.
+
+---
+
+## 13. No Transfer of BASE Identity
+
+This License grants rights to use the licensed Tier 2 Software as expressly provided herein.
+
+It does not transfer ownership of the BASE name, BASE Tier 2 Creator Template name, associated branding, system identity, proprietary documentation, or other intellectual property belonging to William Smith McClinton.
+
+The Licensee may identify a legitimate Creator Deployment as having been created or deployed using authorized BASE software, but may not represent themselves as the creator, owner, licensor, or official operator of the BASE Tier 2 Creator Template itself.
+
+---
+
+## 14. Severability
+
+If any provision of this License is determined to be invalid, illegal, or unenforceable, the remaining provisions shall remain in effect to the maximum extent permitted by law.
+
+---
+
+## 15. Entire License
+
+This License constitutes the software license governing the BASE Tier 2 Creator Template v1 unless replaced or supplemented by a separate written agreement authorized by William Smith McClinton.
+
+No purchase, possession, access, customization, installation, or deployment of the Tier 2 Software grants rights beyond those expressly stated in this License.
+
+---
+
+## 16. Acceptance
+
+By installing, copying, accessing, configuring, deploying, or using the BASE Tier 2 Creator Template v1, the Licensee acknowledges that they have read, understood, and agree to this License.
+
+If the Licensee does not agree to these terms, they must not install, copy, configure, deploy, or use the BASE Tier 2 Creator Template v1.

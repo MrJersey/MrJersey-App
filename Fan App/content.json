@@ -1,0 +1,63 @@
+{
+  "name": "BASE Creator",
+  "bio": "",
+  "contactEmail": "Place Email",
+  "contactLabel": "Email",
+  "backgroundColor": "#000000",
+  "background": {
+    "enabled": false,
+    "type": "none",
+    "url": ""
+  },
+  "heroMedia": {
+    "enabled": true,
+    "type": "image",
+    "url": "./media/hero-image-1783820062284.png",
+    "animation": "float"
+  },
+  "chime": {
+    "enabled": false,
+    "url": "",
+    "volume": 0.65
+  },
+  "pillColor": "#000000",
+  "innerSurface": {
+    "style": "default",
+    "color": "",
+    "url": ""
+  },
+  "live": {
+    "enabled": false,
+    "status": "offline",
+    "watch_url": "",
+    "description": ""
+  },
+  "links": [],
+  "mediaGateway": {
+    "enabled": false,
+    "collections": [
+      {
+        "id": "collection-1783820011390-b6c047e8c036d8",
+        "title": "Add Media",
+        "items": []
+      }
+    ],
+    "presentation": {
+      "style": "default",
+      "color": "#050505",
+      "url": "",
+      "animation": "none"
+    },
+    "externalMedia": []
+  },
+  "supporters": [],
+  "community": {
+    "enabled": false,
+    "provider": "custom",
+    "name": "",
+    "icon": "",
+    "buttonText": "Enter Community",
+    "url": "",
+    "embed": ""
+  }
+}

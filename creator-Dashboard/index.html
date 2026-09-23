@@ -1,0 +1,4527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BASE Creator Dashboard</title>
+
+<style>
+html, body{
+margin:0;
+padding:0;
+background:#000;
+color:#fff;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+min-height:100%;
+}
+
+.wrap{
+max-width:1080px;
+margin:0 auto;
+padding:18px 14px 40px;
+box-sizing:border-box;
+}
+
+.top{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:16px;
+margin-bottom:14px;
+}
+
+h1{
+font-size:34px;
+margin:0 0 6px 0;
+letter-spacing:.2px;
+}
+
+.sub{
+opacity:.72;
+margin:0;
+font-size:16px;
+}
+
+.pill{
+border:2px solid #caa300;
+border-radius:999px;
+padding:10px 14px;
+font-weight:600;
+min-width:160px;
+text-align:center;
+}
+
+.pill.ok{border-color:#2ee06b}
+.pill.bad{border-color:#ff4b4b}
+.pill.warn{border-color:#caa300}
+
+.dashboardTabs{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin:18px 0 10px;
+}
+
+.dashboardTab{
+border:1px solid #2a2a2a;
+background:#0b0b0b;
+color:#fff;
+border-radius:14px;
+padding:10px 16px;
+cursor:pointer;
+}
+
+.dashboardTab:hover{
+border-color:#444;
+}
+
+.dashboardTab.active{
+border-color:#caa300;
+background:#111;
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+.card{
+border:1px solid #222;
+background:#070707;
+border-radius:18px;
+padding:18px;
+margin:18px 0;
+box-shadow:0 0 0 1px rgba(255,255,255,.02) inset;
+}
+
+.row{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.col{
+flex:1;
+min-width:240px;
+}
+
+label{
+display:block;
+font-size:13px;
+opacity:.75;
+margin-bottom:6px;
+}
+
+input,textarea,button,select{
+font:inherit;
+}
+
+input,textarea,select{
+width:100%;
+box-sizing:border-box;
+border-radius:14px;
+border:1px solid #2a2a2a;
+background:#000;
+color:#fff;
+padding:12px;
+outline:none;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
+}
+
+input[type=color]{
+height:52px;
+padding:6px;
+cursor:pointer;
+}
+
+.btnRow{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:12px;
+}
+
+button{
+border-radius:14px;
+border:1px solid #2a2a2a;
+background:#0b0b0b;
+color:#fff;
+padding:12px 16px;
+cursor:pointer;
+}
+
+button:hover{border-color:#444}
+button:disabled{opacity:.5;cursor:not-allowed}
+
+.primary{border-color:#caa300!important}
+.danger{border-color:#5a1b1b!important}
+
+.linksList{margin-top:10px}
+
+.linkRow{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+padding:10px 12px;
+border:1px solid #222;
+border-radius:14px;
+margin-top:10px;
+background:#050505;
+}
+
+.linkText{
+opacity:.92;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+max-width:calc(100% - 110px);
+}
+
+.tiny{
+font-size:12px;
+opacity:.65;
+margin-top:6px;
+}
+
+.statusBox{
+white-space:pre-wrap;
+font-size:12px;
+opacity:.75;
+}
+
+.previewShell{
+display:flex;
+justify-content:center;
+margin-top:18px;
+overflow-x:auto;
+}
+
+.previewDevice{
+width:420px;
+max-width:420px;
+flex:0 0 420px;
+height:720px;
+background:#000;
+border-radius:36px;
+padding:14px;
+border:1px solid #222;
+box-shadow:
+0 0 0 1px rgba(255,255,255,.04) inset,
+0 40px 80px rgba(0,0,0,.8);
+box-sizing:border-box;
+}
+
+.previewFrame{
+display:block;
+width:100%;
+height:100%;
+border:0;
+background:#000;
+border-radius:26px;
+}
+
+.miniPreview{
+border:1px solid #222;
+border-radius:18px;
+padding:16px;
+background:#040404;
+}
+
+.toggleRow{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.mediaList,
+.supportersList{
+margin-top:12px;
+}
+
+.mediaCollectionBlock{
+border:1px solid #222;
+border-radius:16px;
+background:#050505;
+padding:12px;
+margin-top:12px;
+}
+
+.mediaCollectionHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.mediaCollectionName{
+font-weight:800;
+font-size:14px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.mediaCollectionCount{
+font-size:12px;
+opacity:.65;
+flex:0 0 auto;
+}
+
+.mediaItemRow{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:12px;
+padding:12px;
+border:1px solid #222;
+border-radius:14px;
+margin-top:10px;
+background:#050505;
+}
+
+.mediaCollectionBlock .mediaItemRow{
+background:#020202;
+}
+
+.mediaMeta{
+flex:1;
+min-width:0;
+}
+
+.mediaTitle{
+font-weight:700;
+margin-bottom:4px;
+}
+
+.mediaSub{
+opacity:.8;
+font-size:12px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+
+.supporterRow{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:12px;
+padding:12px;
+border:1px solid #222;
+border-radius:14px;
+margin-top:10px;
+background:#050505;
+}
+
+.supporterMeta{
+flex:1;
+min-width:0;
+}
+
+.supporterName{
+font-weight:800;
+margin-bottom:4px;
+}
+
+.supporterSub{
+opacity:.8;
+font-size:12px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.moduleBlock{
+border-top:1px solid #222;
+margin-top:18px;
+padding-top:14px;
+}
+
+.moduleToggle{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+border:1px solid #222;
+background:#050505;
+border-radius:14px;
+padding:12px 14px;
+text-align:left;
+}
+
+.moduleTitle{
+font-weight:800;
+font-size:14px;
+}
+
+.moduleHint{
+font-size:12px;
+opacity:.65;
+margin-top:4px;
+display:none;
+}
+
+.moduleArrow{
+font-size:16px;
+opacity:.75;
+flex:0 0 auto;
+}
+
+.moduleContent{
+display:none;
+padding-top:14px;
+}
+
+.moduleBlock.open .moduleContent{
+display:block;
+}
+
+.moduleBlock.open .moduleArrow{
+transform:rotate(90deg);
+}
+
+
+@media (max-width:720px){
+.top{
+flex-direction:column;
+align-items:stretch;
+}
+
+.pill{
+min-width:0;
+}
+
+.dashboardTab{
+flex:1 1 calc(50% - 10px);
+text-align:center;
+}
+
+.previewDevice{
+width:360px;
+max-width:360px;
+flex:0 0 360px;
+height:520px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="top">
+<div>
+<h1>BASE Creator Dashboard</h1>
+<p class="sub">Load current state first, then edit, preview, and publish.</p>
+</div>
+<div id="statePill" class="pill warn">STATUS: ready</div>
+</div>
+
+<div class="dashboardTabs">
+<button type="button" class="dashboardTab active" data-page="creator">Creator</button>
+<button type="button" class="dashboardTab" data-page="links">Links</button>
+<button type="button" class="dashboardTab" data-page="media">Media</button>
+<button type="button" class="dashboardTab" data-page="preview">Preview</button>
+<button type="button" class="dashboardTab" data-page="publish">Publish</button>
+<button type="button" class="dashboardTab" data-page="status">Status</button>
+</div>
+
+<div id="page-creator" class="page active">
+
+<div class="card">
+
+<div class="moduleBlock" data-module="system-control" style="border-top:none;margin-top:0;padding-top:0;">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">System Control</div>
+<div class="moduleHint">Creator key, content source, and loading controls.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Use this when you need to load current state or reset the creator key.</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Creator Key</label>
+<input id="token" type="password">
+</div>
+
+<div class="col">
+<label>Repository</label>
+<input id="repository" type="text" placeholder="owner/repository">
+</div>
+
+<div class="col">
+<label>content.json URL</label>
+<input id="contentUrl">
+</div>
+</div>
+
+<div class="btnRow">
+<button id="btnLoad" class="primary">Load Current State</button>
+</div>
+
+<div class="tiny" id="lastSha">sha: —</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="moduleBlock" data-module="creator-settings" style="border-top:none;margin-top:0;padding-top:0;">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Creator Settings</div>
+<div class="moduleHint">Basic creator identity, contact, colors, and app icon.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Basic creator identity, contact, colors, and app icon.</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Name</label>
+<input id="name">
+</div>
+
+<div class="col">
+<label>Bio</label>
+<input id="bio">
+</div>
+</div>
+
+<div class="row" style="margin-top:14px;">
+<div class="col">
+<label>Contact Email</label>
+<input id="contactEmail" type="email">
+</div>
+
+<div class="col">
+<label>Button Label</label>
+<input id="contactLabel" type="text">
+</div>
+</div>
+
+<div style="margin-top:14px;">
+<label>Background Color</label>
+<input id="backgroundColor" type="color">
+</div>
+
+<div style="margin-top:18px;border-top:1px solid #222;padding-top:14px;">
+<label>Wallpaper / Video Background</label>
+<div class="row">
+<div class="col">
+<select id="backgroundType">
+<option value="none">none</option>
+<option value="image">image wallpaper</option>
+<option value="video">video wallpaper</option>
+</select>
+</div>
+<div class="col">
+<input id="backgroundFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,video/quicktime">
+</div>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Wallpaper / Video URL (legacy/manual optional)</label>
+<input id="backgroundUrl" type="text" placeholder="https://... or ./media/background.mp4">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:18px;border-top:1px solid #222;padding-top:14px;">
+<label>App Open Chime</label>
+<div class="toggleRow" style="margin-top:12px;">
+<div class="tiny">Optional sound that plays when the Fan App opens.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="chimeEnabled" type="checkbox" style="width:auto;height:auto;">
+</label>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Chime Audio Upload</label>
+<input id="chimeFile" type="file" accept="audio/mpeg,audio/mp3,audio/wav,audio/ogg,audio/aac,audio/mp4,audio/webm">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Chime URL (legacy/manual optional)</label>
+<input id="chimeUrl" type="text" placeholder="https://... or ./media/chime.mp3">
+</div>
+<div class="col">
+<label>Chime Volume</label>
+<input id="chimeVolume" type="range" min="0" max="1" step="0.05" value="0.65">
+<div class="tiny">Recommended: 0.65</div>
+</div>
+</div>
+<div class="btnRow">
+<button id="btnPreviewChime" type="button">Preview Chime</button>
+<button id="btnClearChime" class="danger" type="button">Remove Chime</button>
+</div>
+</div>
+
+<div style="margin-top:14px;">
+<label>Pill Color</label>
+<input id="pillColor" type="color">
+</div>
+
+<div style="margin-top:18px;border-top:1px solid #222;padding-top:14px;">
+<label>Inner Surface</label>
+<div class="tiny">Controls content container presentation separate from the outer background and action pill color.</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Inner Surface Style</label>
+<select id="innerSurfaceStyle">
+<option value="default">default glass</option>
+<option value="color">color</option>
+<option value="image">wallpaper</option>
+<option value="video">video</option>
+</select>
+<div class="tiny">Default restores the BASE transparent glass presentation.</div>
+</div>
+<div class="col">
+<label>Inner Surface Color</label>
+<input id="innerSurfaceColor" type="color" value="#050505">
+<div class="tiny">Used when Inner Surface Style is color.</div>
+</div>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Inner Surface Asset Upload</label>
+<input id="innerSurfaceFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,video/quicktime">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Inner Surface Asset URL (legacy/manual optional)</label>
+<input id="innerSurfaceUrl" type="text" placeholder="https://... or ./media/inner-surface.mp4">
+<div class="tiny">Use only when you need a manual URL instead of a file upload.</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:18px;border-top:1px solid #222;padding-top:14px;">
+<label>App Icon</label>
+<input id="appIconInput" type="file" accept="image/png,image/jpeg">
+<div class="btnRow">
+<button id="btnClearAppIcon" class="danger" type="button">Remove App Icon</button>
+</div>
+<div class="tiny">Removes the custom app icon and creates a clean BASE template icon on publish.</div>
+</div>
+
+<div style="margin-top:18px;border-top:1px solid #222;padding-top:14px;">
+<label>Hero Media</label>
+<div class="tiny">Separate from the app icon. Use this for the creator presence layer.</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Hero Type</label>
+<select id="heroMediaType">
+<option value="none">none</option>
+<option value="image">image</option>
+<option value="video">video</option>
+</select>
+</div>
+<div class="col">
+<label>Hero Animation</label>
+<select id="heroMediaAnimation">
+<option value="none">none</option>
+<option value="float">float</option>
+<option value="pulse">pulse</option>
+<option value="drift">slow drift</option>
+<option value="flat">Flat Spin</option>
+<option value="spin">3D Spin</option>
+</select>
+</div>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Hero Media Upload</label>
+<input id="heroMediaFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,video/quicktime">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Hero Media URL (legacy/manual optional)</label>
+<input id="heroMediaUrl" type="text" placeholder="https://... or ./media/hero.png">
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="live">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Live Control</div>
+<div class="moduleHint">Control live availability and stream destination.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Control live availability and stream destination.</div>
+
+<div class="toggleRow" style="margin-top:12px;">
+<div class="tiny">Only enabled live sessions appear in the Fan App.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="liveEnabled" type="checkbox" style="width:auto;height:auto;">
+</label>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Status</label>
+<select id="liveStatus">
+<option value="offline">offline</option>
+<option value="live">live</option>
+</select>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Live Watch URL</label>
+<input id="liveWatchUrl" type="text" placeholder="https://...">
+<div class="tiny">Paste your Cloudflare or other live host URL.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Live Description</label>
+<textarea id="liveDescription" placeholder="Tell fans what the live space is for, what to expect, or when to check in."></textarea>
+<div class="tiny">Appears under the Live player in the Fan App.</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="supporters">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Connections</div>
+<div class="moduleHint">Display sponsors, partners, venues, collaborators, and supporters without payments, accounts, tracking, or platform behavior.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Display sponsors, partners, venues, collaborators, and supporters without payments, accounts, tracking, or platform behavior.</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Type</label>
+<select id="supporterType">
+<option value="supporter">supporter</option>
+<option value="sponsor">sponsor</option>
+<option value="partner">partner</option>
+<option value="venue">venue</option>
+<option value="collaborator">collaborator</option>
+</select>
+</div>
+
+<div class="col">
+<label>Name</label>
+<input id="supporterName" type="text" placeholder="Name">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Tagline</label>
+<input id="supporterTagline" type="text" placeholder="Official supporter, launch partner, venue partner">
+</div>
+
+<div class="col">
+<label>Button Text</label>
+<input id="supporterButtonText" type="text" placeholder="Visit Supporter">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Description</label>
+<input id="supporterDesc" type="text" placeholder="Short explanation of the support relationship">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Supporter Thumbnail Upload</label>
+<input id="supporterThumbFile" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Thumbnail URL (legacy/manual optional)</label>
+<input id="supporterThumbnail" type="text" placeholder="https://.../logo.png">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Supporter URL</label>
+<input id="supporterUrl" type="text" placeholder="https://...">
+</div>
+</div>
+
+<div class="toggleRow" style="margin-top:12px;">
+<div class="tiny">Only enabled supporters appear in the Fan App.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="supporterEnabled" type="checkbox" checked style="width:auto;height:auto;">
+</label>
+</div>
+
+<div class="btnRow">
+<button id="btnAddSupporter">Add Supporter</button>
+<button id="btnClearSupporters" class="danger">Clear Supporters</button>
+</div>
+
+<div id="supportersList" class="supportersList"></div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="community">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Community</div>
+<div class="moduleHint">Connect a persistent community doorway without BASE owning accounts, messages, or audience data.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Connect a persistent community doorway without BASE owning accounts, messages, or audience data.</div>
+
+<div class="toggleRow" style="margin-top:12px;">
+<div class="tiny">Only enabled community doorways will publish into content.json.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="communityEnabled" type="checkbox" style="width:auto;height:auto;">
+</label>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Provider</label>
+<select id="communityProvider">
+<option value="matrix">Matrix</option>
+<option value="discord">Discord</option>
+<option value="telegram">Telegram</option>
+<option value="whatsapp">WhatsApp</option>
+<option value="custom">Custom</option>
+</select>
+</div>
+
+<div class="col">
+<label>Community Name</label>
+<input id="communityName" type="text" placeholder="Community name">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Community Icon Upload</label>
+<input id="communityIconFile" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Community Icon URL (legacy/manual optional)</label>
+<input id="communityIcon" type="text" placeholder="https://.../icon.png">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Button Text</label>
+<input id="communityButtonText" type="text" placeholder="Enter Community">
+</div>
+
+<div class="col">
+<label>Community URL</label>
+<input id="communityUrl" type="text" placeholder="https://...">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Community Embed</label>
+<input id="communityEmbed" type="text" placeholder="https://...">
+</div>
+</div>
+
+<div class="tiny">Use Community URL for external communities. Use Community Embed for embedded community experiences.</div>
+
+<div class="btnRow">
+<button id="btnAddCommunity">Add Community</button>
+<button id="btnClearCommunity" class="danger">Remove Community</button>
+</div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="analytics">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Analytics</div>
+<div class="moduleHint">Optional, provider-neutral traffic measurement. Off by default. Fan App loads normally either way.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Optional aggregate traffic measurement. No fan accounts, no login, no behavioral profiles. The Fan App never depends on this being on.</div>
+
+<div class="toggleRow" style="margin-top:12px;">
+<div class="tiny">Only enabled analytics will publish into content.json and initialize in the Fan App.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="analyticsEnabled" type="checkbox" style="width:auto;height:auto;">
+</label>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Provider</label>
+<input id="analyticsProvider" type="text" placeholder="goatcounter, ga, umami, plausible...">
+<div class="tiny">Any provider name. Base does not hardcode a specific provider.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Provider Configuration</label>
+<textarea id="analyticsConfig" placeholder='&lt;script data-goatcounter="https://yoursite.goatcounter.com/count" async src="//gc.zgo.at/count.js"&gt;&lt;/script&gt;'></textarea>
+<div class="tiny">Paste the exact embed code your provider gives you, whatever shape it comes in — a script tag, an inline snippet, or multiple tags. It runs on the Fan App exactly as given.</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page-links" class="page">
+
+<div class="card">
+
+<h3>Links</h3>
+
+<div class="row">
+<div class="col">
+<label>Label</label>
+<input id="linkLabelInput">
+</div>
+
+<div class="col">
+<label>URL</label>
+<input id="linkUrlInput">
+</div>
+</div>
+
+<div class="btnRow">
+<button id="addLinkBtn">Add Link</button>
+<button id="clearLinksBtn" class="danger">Clear Links</button>
+</div>
+
+<div id="linksList" class="linksList"></div>
+
+</div>
+
+</div>
+
+<div id="page-media" class="page">
+
+<div class="card">
+
+<h3>Media Gateway</h3>
+<div class="tiny">Manage media access, collections, uploads, thumbnails, and the current media list without one long scrolling form.</div>
+
+<div class="moduleBlock open" data-module="media-gateway" style="border-top:none;margin-top:14px;padding-top:0;">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Media Access</div>
+<div class="moduleHint">Turn the Media tab on or off.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="toggleRow">
+<div class="tiny">Controls what fans can access from the Media tab.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="mediaEnabled" type="checkbox" style="width:auto;height:auto;">
+</label>
+</div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="media-item">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Collections & Add Media Item</div>
+<div class="moduleHint">Choose a collection, add/remove groups, then add one image, video, URL, thumbnail, and description.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="tiny">Choose where the next media item belongs, or create a new collection before adding media.</div>
+
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Collection</label>
+<select id="mediaCollectionSelect"></select>
+<div class="tiny">Choose where the next media item belongs.</div>
+</div>
+
+<div class="col">
+<label>New Collection</label>
+<input id="mediaCollectionTitle" type="text" placeholder="Event Night, Clips, Photos">
+<div class="tiny">Add lightweight groups without cluttering the fan app.</div>
+</div>
+</div>
+
+<div class="btnRow">
+<button id="btnAddCollection">Add Collection</button>
+<button id="btnRemoveCollection" class="danger">Remove Selected Collection</button>
+</div>
+
+
+
+<div style="border-top:1px solid #222;margin-top:18px;padding-top:14px;"></div>
+
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Item Title</label>
+<input id="mediaTitle" type="text" placeholder="Clip title">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>URL (optional)</label>
+<input id="mediaUrl" type="text" placeholder="https://...">
+<div class="tiny">Use this only when the item should open an external media link.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Local Media Upload (optional)</label>
+<input id="mediaFile" type="file" accept="video/mp4,video/webm,video/quicktime,image/png,image/jpeg,image/webp">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Thumbnail Upload (optional)</label>
+<input id="mediaThumbFile" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Thumbnail URL (legacy/manual optional)</label>
+<input id="mediaThumb" type="text" placeholder="https://.../thumb.jpg">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Description (optional)</label>
+<input id="mediaDesc" type="text" placeholder="Short description">
+</div>
+</div>
+
+<div class="btnRow">
+<button id="btnAddMedia">Add Item</button>
+<button id="btnClearMedia" class="danger">Clear Media</button>
+</div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="media-external">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">External Media</div>
+<div class="moduleHint">Add embedded photo, video, gallery, or future provider media experiences.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="toggleRow" style="margin-top:12px;">
+<div class="tiny">Only enabled external media appears in the Fan App when supported by the Fan App runtime.</div>
+<label style="display:flex;align-items:center;gap:10px;margin:0;">
+<span class="tiny">Enabled</span>
+<input id="externalMediaEnabled" type="checkbox" checked style="width:auto;height:auto;">
+</label>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Provider</label>
+<select id="externalMediaProvider">
+<option value="custom">Custom</option>
+<option value="vimeo">Vimeo</option>
+<option value="pixieset">Pixieset</option>
+<option value="flickr">Flickr</option>
+<option value="future">Future Provider</option>
+</select>
+</div>
+
+<div class="col">
+<label>External Media Name</label>
+<input id="externalMediaName" type="text" placeholder="Summer Photos, Behind The Scenes, Live Archive">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>External Media URL</label>
+<input id="externalMediaUrl" type="text" placeholder="https://...">
+<div class="tiny">Use this for the external doorway or fallback link.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>External Media Embed URL</label>
+<input id="externalMediaEmbed" type="text" placeholder="https://...">
+<div class="tiny">Use this for embedded media experiences when the provider supports embeds.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Thumbnail Upload (optional)</label>
+<input id="externalMediaThumbFile" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Thumbnail URL (legacy/manual optional)</label>
+<input id="externalMediaThumbnail" type="text" placeholder="https://.../thumb.jpg">
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Button Text</label>
+<input id="externalMediaButtonText" type="text" placeholder="Open Gallery">
+</div>
+</div>
+
+<div class="btnRow">
+<button id="btnAddExternalMedia">Add External Media</button>
+<button id="btnClearExternalMedia" class="danger">Remove External Media</button>
+</div>
+
+<div id="externalMediaList" class="mediaList"></div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock" data-module="media-presentation">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Media Presentation</div>
+<div class="moduleHint">Control the global media card look with color, wallpaper, video, and motion.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Media Card Style</label>
+<select id="mediaCardStyle">
+<option value="default">default</option>
+<option value="color">color</option>
+<option value="image">wallpaper</option>
+<option value="video">video</option>
+</select>
+<div class="tiny">Choose how the media card background should render in the Fan App.</div>
+</div>
+
+<div class="col">
+<label>Media Card Animation</label>
+<select id="mediaCardAnimation">
+<option value="none">none</option>
+<option value="float">float</option>
+<option value="pulse">pulse</option>
+<option value="drift">slow drift</option>
+</select>
+<div class="tiny">Applies to the media card presentation layer when supported by the Fan App runtime.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Media Card Color</label>
+<input id="mediaCardColor" type="color" value="#050505">
+<div class="tiny">Used when Media Card Style is color.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Media Card Asset Upload</label>
+<input id="mediaCardFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,video/quicktime">
+<div class="tiny">Uploads automatically into Fan App/media/ during publish.</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:12px;">
+<div class="col">
+<label>Media Card Asset URL (legacy/manual optional)</label>
+<input id="mediaCardUrl" type="text" placeholder="https://... or ./media/media-card.mp4">
+<div class="tiny">Use only when you need a manual URL instead of a file upload.</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="moduleBlock open" data-module="media-current">
+
+<button type="button" class="moduleToggle">
+<div>
+<div class="moduleTitle">Current Media</div>
+<div class="moduleHint">Review and remove existing media items.</div>
+</div>
+<div class="moduleArrow">›</div>
+</button>
+
+<div class="moduleContent">
+
+<div id="mediaList" class="mediaList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page-preview" class="page">
+
+<div class="card">
+
+<h3 style="margin-bottom:6px;">Fan App Preview</h3>
+<div class="tiny">This is exactly how fans experience your app.</div>
+
+<div class="previewShell">
+
+<div class="previewDevice">
+
+<iframe
+id="fanPreviewFrame"
+class="previewFrame"
+src="../Fan App/index.html?basePreviewShell=1">
+</iframe>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page-publish" class="page">
+
+<div class="card">
+
+<div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+
+<div>
+<div>Repo: <span id="repoLabel"></span></div>
+<div class="tiny">Target: Fan App/content.json</div>
+</div>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;">
+<button id="btnPublish" disabled>Publish</button>
+<button id="btnPrepareCleanTemplate" class="danger" type="button">Prepare Clean Template</button>
+<button id="btnResetToken" class="danger">Reset Key</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page-status" class="page">
+
+<div class="card">
+<h3>Status</h3>
+<div id="status" class="statusBox"></div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let OWNER=""
+let REPO=""
+const BRANCH="main"
+
+const TARGET_PATH="Fan App/content.json"
+const DEFAULT_CONTENT_URL=""
+const LS_TOKEN="base_creator_token_v1"
+const LS_REPOSITORY="base_creator_repository_v1"
+const LS_CONTENT_URL="base_creator_content_url_v1"
+
+const $=id=>document.getElementById(id)
+
+const el={
+token:$("token"),
+repository:$("repository"),
+contentUrl:$("contentUrl"),
+btnLoad:$("btnLoad"),
+btnPublish:$("btnPublish"),
+btnPrepareCleanTemplate:$("btnPrepareCleanTemplate"),
+btnResetToken:$("btnResetToken"),
+name:$("name"),
+bio:$("bio"),
+backgroundColor:$("backgroundColor"),
+backgroundType:$("backgroundType"),
+backgroundFile:$("backgroundFile"),
+backgroundUrl:$("backgroundUrl"),
+chimeEnabled:$("chimeEnabled"),
+chimeFile:$("chimeFile"),
+chimeUrl:$("chimeUrl"),
+chimeVolume:$("chimeVolume"),
+btnPreviewChime:$("btnPreviewChime"),
+btnClearChime:$("btnClearChime"),
+pillColor:$("pillColor"),
+innerSurfaceStyle:$("innerSurfaceStyle"),
+innerSurfaceColor:$("innerSurfaceColor"),
+innerSurfaceFile:$("innerSurfaceFile"),
+innerSurfaceUrl:$("innerSurfaceUrl"),
+appIconInput:$("appIconInput"),
+btnClearAppIcon:$("btnClearAppIcon"),
+heroMediaType:$("heroMediaType"),
+heroMediaFile:$("heroMediaFile"),
+heroMediaUrl:$("heroMediaUrl"),
+heroMediaAnimation:$("heroMediaAnimation"),
+contactEmail:$("contactEmail"),
+contactLabel:$("contactLabel"),
+liveEnabled:$("liveEnabled"),
+liveStatus:$("liveStatus"),
+liveWatchUrl:$("liveWatchUrl"),
+liveDescription:$("liveDescription"),
+linkLabelInput:$("linkLabelInput"),
+linkUrlInput:$("linkUrlInput"),
+addLinkBtn:$("addLinkBtn"),
+clearLinksBtn:$("clearLinksBtn"),
+linksList:$("linksList"),
+mediaEnabled:$("mediaEnabled"),
+mediaCollectionSelect:$("mediaCollectionSelect"),
+mediaCollectionTitle:$("mediaCollectionTitle"),
+btnAddCollection:$("btnAddCollection"),
+btnRemoveCollection:$("btnRemoveCollection"),
+mediaTitle:$("mediaTitle"),
+mediaUrl:$("mediaUrl"),
+mediaFile:$("mediaFile"),
+mediaThumb:$("mediaThumb"),
+mediaThumbFile:$("mediaThumbFile"),
+mediaDesc:$("mediaDesc"),
+btnAddMedia:$("btnAddMedia"),
+btnClearMedia:$("btnClearMedia"),
+externalMediaEnabled:$("externalMediaEnabled"),
+externalMediaProvider:$("externalMediaProvider"),
+externalMediaName:$("externalMediaName"),
+externalMediaUrl:$("externalMediaUrl"),
+externalMediaEmbed:$("externalMediaEmbed"),
+externalMediaThumbFile:$("externalMediaThumbFile"),
+externalMediaThumbnail:$("externalMediaThumbnail"),
+externalMediaButtonText:$("externalMediaButtonText"),
+btnAddExternalMedia:$("btnAddExternalMedia"),
+btnClearExternalMedia:$("btnClearExternalMedia"),
+externalMediaList:$("externalMediaList"),
+mediaCardStyle:$("mediaCardStyle"),
+mediaCardColor:$("mediaCardColor"),
+mediaCardFile:$("mediaCardFile"),
+mediaCardUrl:$("mediaCardUrl"),
+mediaCardAnimation:$("mediaCardAnimation"),
+mediaList:$("mediaList"),
+supporterType:$("supporterType"),
+supporterName:$("supporterName"),
+supporterTagline:$("supporterTagline"),
+supporterButtonText:$("supporterButtonText"),
+supporterDesc:$("supporterDesc"),
+supporterThumbFile:$("supporterThumbFile"),
+supporterThumbnail:$("supporterThumbnail"),
+supporterUrl:$("supporterUrl"),
+supporterEnabled:$("supporterEnabled"),
+btnAddSupporter:$("btnAddSupporter"),
+btnClearSupporters:$("btnClearSupporters"),
+supportersList:$("supportersList"),
+communityEnabled:$("communityEnabled"),
+communityProvider:$("communityProvider"),
+communityName:$("communityName"),
+communityIconFile:$("communityIconFile"),
+communityIcon:$("communityIcon"),
+communityButtonText:$("communityButtonText"),
+communityUrl:$("communityUrl"),
+communityEmbed:$("communityEmbed"),
+btnAddCommunity:$("btnAddCommunity"),
+btnClearCommunity:$("btnClearCommunity"),
+analyticsEnabled:$("analyticsEnabled"),
+analyticsProvider:$("analyticsProvider"),
+analyticsConfig:$("analyticsConfig"),
+status:$("status"),
+repoLabel:$("repoLabel"),
+statePill:$("statePill"),
+lastSha:$("lastSha"),
+previewFrame:$("fanPreviewFrame")
+}
+
+let hasLoadedState=false
+let linkState=[]
+let mediaItems=[]
+let mediaCollections=[]
+let externalMediaState=[]
+let mediaHydrated=false
+let mediaTouched=false
+let supporterState=[]
+let supportersHydrated=false
+let supportersTouched=false
+let communityHydrated=false
+let communityTouched=false
+let analyticsHydrated=false
+let analyticsTouched=false
+let isPublishing=false
+let isDirty=false
+let loadedSha=null
+let shaConflict=false
+let appIconResetRequested=false
+const defaultPublishLabel="Publish"
+
+function log(t){
+const s=new Date().toLocaleString()
+el.status.textContent=`[${s}] ${t}\n`+el.status.textContent
+}
+
+function setPill(type,text){
+el.statePill.className=`pill ${type}`
+el.statePill.textContent=text
+}
+
+function ghEncodePath(path){
+return path.split("/").map(encodeURIComponent).join("/")
+}
+
+function ghHeaders(token){
+return{
+Accept:"application/vnd.github+json",
+Authorization:`Bearer ${String(token||"").trim()}`,
+"X-GitHub-Api-Version":"2022-11-28",
+"Content-Type":"application/json"
+}
+}
+
+function toBase64Utf8(str){
+const utf8=new TextEncoder().encode(str)
+let bin=""
+utf8.forEach(b=>bin+=String.fromCharCode(b))
+return btoa(bin)
+}
+
+function fromBase64Utf8(b64){
+const bytes=Uint8Array.from(atob(b64.replace(/\s/g,"")),c=>c.charCodeAt(0))
+return new TextDecoder().decode(bytes)
+}
+
+function escapeHtml(text){
+return String(text ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;")
+}
+
+function makeCollectionId(){
+return `collection-${Date.now()}-${Math.random().toString(16).slice(2)}`
+}
+
+function ensureDefaultCollection(){
+if(!Array.isArray(mediaCollections)){
+mediaCollections=[]
+}
+
+if(mediaCollections.length===0){
+mediaCollections=[{
+id:"collection-default",
+title:"Latest"
+}]
+}
+
+mediaCollections=mediaCollections.map((c,i)=>({
+id:c.id || (i===0 ? "collection-default" : makeCollectionId()),
+title:String(c.title || (i===0 ? "Latest" : `Collection ${i+1}`))
+}))
+
+mediaItems=mediaItems.map(item=>({
+...item,
+collectionId:item.collectionId || mediaCollections[0].id
+}))
+}
+
+function getCollectionTitle(id){
+const found=mediaCollections.find(c=>c.id===id)
+return found ? found.title : "Latest"
+}
+
+function enablePublishIfReady(){
+const hasToken=(el.token.value||"").trim().length>0
+const hasSha=String(loadedSha||"").trim().length>0
+el.btnPublish.disabled=!!isPublishing || !(hasLoadedState && hasToken && isDirty && hasSha && !shaConflict)
+refreshPreview()
+}
+
+function setPublishBusy(busy){
+isPublishing=busy===true
+el.btnPublish.textContent=isPublishing ? "Publishing..." : defaultPublishLabel
+if(el.btnPrepareCleanTemplate){
+el.btnPrepareCleanTemplate.disabled=isPublishing
+}
+enablePublishIfReady()
+}
+
+function markDirty(){
+isDirty=true
+enablePublishIfReady()
+}
+
+function clearDirty(){
+isDirty=false
+enablePublishIfReady()
+}
+
+function clearShaState(){
+loadedSha=null
+shaConflict=false
+el.lastSha.textContent="sha: —"
+enablePublishIfReady()
+}
+
+function applyRepository(){
+
+const repository=(el.repository.value||"").trim()
+
+if(!repository){
+OWNER=""
+REPO=""
+el.repoLabel.textContent=`—@${BRANCH}`
+throw new Error("Repository is required. Enter owner/repository.")
+}
+
+const parts=repository.split("/")
+
+if(parts.length!==2 || !parts[0].trim() || !parts[1].trim()){
+throw new Error("Repository must use owner/repository.")
+}
+
+OWNER=parts[0].trim()
+REPO=parts[1].trim()
+el.repoLabel.textContent=`${OWNER}/${REPO}@${BRANCH}`
+
+return repository
+}
+
+async function syncLoadedSha(){
+const token=(el.token.value||"").trim()
+
+if(!token){
+clearShaState()
+return
+}
+
+try{
+const meta=await ghGetFileMeta(token,TARGET_PATH)
+loadedSha=meta?.sha || null
+shaConflict=false
+el.lastSha.textContent=loadedSha ? `sha: ${loadedSha}` : "sha: —"
+}catch(e){
+loadedSha=null
+shaConflict=false
+el.lastSha.textContent="sha: —"
+log(`SHA sync failed: ${e.message}`)
+}
+
+enablePublishIfReady()
+}
+
+async function fetchState(){
+const raw=(el.contentUrl.value||DEFAULT_CONTENT_URL).trim() || DEFAULT_CONTENT_URL
+const url=new URL(raw)
+url.searchParams.set("ts",Date.now())
+const res=await fetch(url.toString(),{cache:"no-store"})
+if(!res.ok) throw new Error(`content.json load failed (${res.status})`)
+return res.json()
+}
+
+function renderLinks(){
+
+el.linksList.innerHTML=""
+
+linkState.forEach((l,i)=>{
+
+const row=document.createElement("div")
+row.className="linkRow"
+
+const text=document.createElement("div")
+text.className="linkText"
+text.textContent=`${l.label} — ${l.url}`
+
+const remove=document.createElement("button")
+remove.textContent="Remove"
+
+remove.onclick=()=>{
+linkState.splice(i,1)
+renderLinks()
+markDirty()
+}
+
+row.appendChild(text)
+row.appendChild(remove)
+
+el.linksList.appendChild(row)
+
+})
+
+}
+
+
+function hydrateCommunity(state){
+
+communityHydrated=true
+
+const community=state && typeof state==="object" && state.community && typeof state.community==="object"
+? state.community
+: {}
+
+el.communityEnabled.checked=community.enabled===true
+el.communityProvider.value=community.provider || "matrix"
+el.communityName.value=community.name || ""
+el.communityIcon.value=community.icon || ""
+el.communityIconFile.value=""
+el.communityButtonText.value=community.buttonText || "Enter Community"
+el.communityUrl.value=community.url || ""
+el.communityEmbed.value=community.embed || ""
+
+}
+
+function buildCommunity(){
+if(!(communityHydrated || communityTouched)) return null
+
+return{
+enabled:el.communityEnabled.checked===true,
+provider:(el.communityProvider.value || "matrix").trim() || "matrix",
+name:(el.communityName.value || "").trim(),
+icon:(el.communityIcon.value || "").trim(),
+buttonText:(el.communityButtonText.value || "Enter Community").trim() || "Enter Community",
+url:(el.communityUrl.value || "").trim(),
+embed:(el.communityEmbed.value || "").trim()
+}
+
+}
+
+
+async function uploadCommunityIcon(token,file){
+const safeExt=getSafeMediaThumbExtension(file)
+const fileName=`community-icon-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE community icon ${fileName}`
+)
+
+return localPath
+}
+
+async function buildCommunityForPublish(token){
+if(!(communityHydrated || communityTouched)) return null
+
+let icon=(el.communityIcon.value || "").trim()
+
+const iconFile=el.communityIconFile.files[0] || null
+
+if(iconFile){
+log("Community icon upload started.")
+icon=await uploadCommunityIcon(token,iconFile)
+el.communityIcon.value=icon
+el.communityIconFile.value=""
+log(`Community icon uploaded: ${icon}`)
+}
+
+return{
+enabled:el.communityEnabled.checked===true,
+provider:(el.communityProvider.value || "matrix").trim() || "matrix",
+name:(el.communityName.value || "").trim(),
+icon,
+buttonText:(el.communityButtonText.value || "Enter Community").trim() || "Enter Community",
+url:(el.communityUrl.value || "").trim(),
+embed:(el.communityEmbed.value || "").trim()
+}
+
+}
+
+
+function hydrateAnalytics(state){
+
+analyticsHydrated=true
+
+const analytics=state && typeof state==="object" && state.analytics && typeof state.analytics==="object"
+? state.analytics
+: {}
+
+el.analyticsEnabled.checked=analytics.enabled===true
+el.analyticsProvider.value=analytics.provider || ""
+el.analyticsConfig.value=analytics.snippet || ""
+
+}
+
+function buildAnalytics(){
+if(!(analyticsHydrated || analyticsTouched)) return null
+
+return{
+enabled:el.analyticsEnabled.checked===true,
+provider:(el.analyticsProvider.value || "").trim(),
+snippet:(el.analyticsConfig.value || "").trim()
+}
+
+}
+
+function renderSupporters(){
+
+el.supportersList.innerHTML=""
+
+const total=document.createElement("div")
+total.className="tiny"
+total.textContent=`Supporters: ${supporterState.length}`
+el.supportersList.appendChild(total)
+
+supporterState.forEach((item,i)=>{
+
+const row=document.createElement("div")
+row.className="supporterRow"
+
+const left=document.createElement("div")
+left.className="supporterMeta"
+
+const name=document.createElement("div")
+name.className="supporterName"
+name.textContent=item.name || "(unnamed supporter)"
+
+const sub=document.createElement("div")
+sub.className="supporterSub"
+sub.textContent=`${item.type || "supporter"} · ${item.enabled===false ? "disabled" : "enabled"} · ${item.thumbnail ? item.thumbnail : (item.thumbnailFile instanceof File ? "(thumbnail pending publish)" : "(no thumbnail)")}`
+
+left.appendChild(name)
+left.appendChild(sub)
+
+const remove=document.createElement("button")
+remove.textContent="Remove"
+
+remove.onclick=()=>{
+supporterState.splice(i,1)
+supportersTouched=true
+renderSupporters()
+markDirty()
+}
+
+row.appendChild(left)
+row.appendChild(remove)
+
+el.supportersList.appendChild(row)
+
+})
+
+}
+
+function hydrateSupporters(state){
+
+supportersHydrated=true
+
+const incoming=Array.isArray(state?.supporters) ? state.supporters : []
+
+supporterState=incoming.map(x=>({
+id:x?.id || `supporter-${Math.random().toString(16).slice(2)}`,
+type:String(x?.type || "supporter"),
+name:String(x?.name || ""),
+tagline:String(x?.tagline || ""),
+description:String(x?.description || ""),
+thumbnail:String(x?.thumbnail || ""),
+url:String(x?.url || ""),
+buttonText:String(x?.buttonText || "Visit Supporter"),
+enabled:x?.enabled===false ? false : true
+}))
+
+renderSupporters()
+
+}
+
+function buildSupporters(){
+if(!(supportersHydrated || supportersTouched)) return null
+
+return supporterState.map(item=>({
+id:item.id || `supporter-${Math.random().toString(16).slice(2)}`,
+type:(item.type || "supporter").trim() || "supporter",
+name:(item.name || "").trim(),
+tagline:(item.tagline || "").trim(),
+description:(item.description || "").trim(),
+thumbnail:(item.thumbnail || "").trim(),
+url:(item.url || "").trim(),
+buttonText:(item.buttonText || "Visit Supporter").trim() || "Visit Supporter",
+enabled:item.enabled===false ? false : true
+}))
+
+}
+
+async function uploadSupporterThumbnail(token,file,itemId){
+const safeExt=getSafeMediaThumbExtension(file)
+const safeId=String(itemId || `supporter-${Date.now()}`).replace(/[^a-zA-Z0-9_-]/g,"")
+const fileName=`supporter-${safeId}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE supporter thumbnail ${fileName}`
+)
+
+return localPath
+}
+
+async function buildSupportersForPublish(token){
+if(!(supportersHydrated || supportersTouched)) return null
+
+const supporters=[]
+
+for(const item of supporterState){
+
+let thumbnail=(item.thumbnail || "").trim()
+
+if(item.thumbnailFile instanceof File){
+log(`Supporter thumbnail upload started: ${item.name || "supporter"}`)
+thumbnail=await uploadSupporterThumbnail(token,item.thumbnailFile,item.id)
+item.thumbnail=thumbnail
+delete item.thumbnailFile
+log(`Supporter thumbnail uploaded: ${thumbnail}`)
+}
+
+supporters.push({
+id:item.id || `supporter-${Math.random().toString(16).slice(2)}`,
+type:(item.type || "supporter").trim() || "supporter",
+name:(item.name || "").trim(),
+tagline:(item.tagline || "").trim(),
+description:(item.description || "").trim(),
+thumbnail,
+url:(item.url || "").trim(),
+buttonText:(item.buttonText || "Visit Supporter").trim() || "Visit Supporter",
+enabled:item.enabled===false ? false : true
+})
+
+}
+
+return supporters
+
+}
+
+function renderCollectionSelect(){
+ensureDefaultCollection()
+
+const current=el.mediaCollectionSelect.value || mediaCollections[0].id
+
+el.mediaCollectionSelect.innerHTML=""
+
+mediaCollections.forEach(collection=>{
+const option=document.createElement("option")
+option.value=collection.id
+option.textContent=collection.title
+el.mediaCollectionSelect.appendChild(option)
+})
+
+if(mediaCollections.some(c=>c.id===current)){
+el.mediaCollectionSelect.value=current
+}else{
+el.mediaCollectionSelect.value=mediaCollections[0].id
+}
+}
+
+function renderMediaList(){
+
+ensureDefaultCollection()
+renderCollectionSelect()
+
+el.mediaList.innerHTML=""
+
+const total=document.createElement("div")
+total.className="tiny"
+total.textContent=`Collections: ${mediaCollections.length} · Items: ${mediaItems.length}`
+el.mediaList.appendChild(total)
+
+mediaCollections.forEach(collection=>{
+
+const block=document.createElement("div")
+block.className="mediaCollectionBlock"
+
+const head=document.createElement("div")
+head.className="mediaCollectionHead"
+
+const name=document.createElement("div")
+name.className="mediaCollectionName"
+name.textContent=collection.title
+
+const itemsForCollection=mediaItems.filter(item=>(item.collectionId || mediaCollections[0].id)===collection.id)
+
+const count=document.createElement("div")
+count.className="mediaCollectionCount"
+count.textContent=`${itemsForCollection.length} item${itemsForCollection.length===1 ? "" : "s"}`
+
+head.appendChild(name)
+head.appendChild(count)
+block.appendChild(head)
+
+itemsForCollection.forEach((item)=>{
+
+const row=document.createElement("div")
+row.className="mediaItemRow"
+
+const left=document.createElement("div")
+left.className="mediaMeta"
+
+const t=document.createElement("div")
+t.className="mediaTitle"
+t.textContent=item.title||"(untitled)"
+
+const sub=document.createElement("div")
+sub.className="mediaSub"
+sub.textContent=`${item.access||"public"} — ${item.url ? item.url : (item.mediaFile instanceof File ? "(local media pending publish)" : "(no url)")}`
+
+left.appendChild(t)
+left.appendChild(sub)
+
+const remove=document.createElement("button")
+remove.textContent="Remove"
+
+remove.onclick=()=>{
+mediaItems=mediaItems.filter(x=>x.id!==item.id)
+mediaTouched=true
+renderMediaList()
+markDirty()
+}
+
+row.appendChild(left)
+row.appendChild(remove)
+
+block.appendChild(row)
+
+})
+
+el.mediaList.appendChild(block)
+
+})
+
+}
+
+
+function renderExternalMediaList(){
+
+if(!el.externalMediaList)return
+
+el.externalMediaList.innerHTML=""
+
+const total=document.createElement("div")
+total.className="tiny"
+total.textContent=`External Media: ${externalMediaState.length}`
+el.externalMediaList.appendChild(total)
+
+externalMediaState.forEach((item,i)=>{
+
+const row=document.createElement("div")
+row.className="mediaItemRow"
+
+const left=document.createElement("div")
+left.className="mediaMeta"
+
+const t=document.createElement("div")
+t.className="mediaTitle"
+t.textContent=item.name || "(unnamed external media)"
+
+const sub=document.createElement("div")
+sub.className="mediaSub"
+sub.textContent=`${item.provider || "custom"} · ${item.enabled===false ? "disabled" : "enabled"} · ${item.embed ? item.embed : (item.url || "(no url)")}`
+
+left.appendChild(t)
+left.appendChild(sub)
+
+const remove=document.createElement("button")
+remove.textContent="Remove"
+
+remove.onclick=()=>{
+externalMediaState.splice(i,1)
+mediaTouched=true
+renderExternalMediaList()
+markDirty()
+}
+
+row.appendChild(left)
+row.appendChild(remove)
+
+el.externalMediaList.appendChild(row)
+
+})
+
+}
+
+function hydrateMediaGateway(state){
+
+const mg=state && typeof state==="object" ? state.mediaGateway : null
+
+mediaHydrated=true
+
+if(!mg || typeof mg!=="object"){
+el.mediaEnabled.checked=false
+mediaCollections=[{id:"collection-default",title:"Latest"}]
+mediaItems=[]
+externalMediaState=[]
+hydrateMediaPresentation({})
+renderMediaList()
+renderExternalMediaList()
+return
+}
+
+el.mediaEnabled.checked=mg.enabled===true
+hydrateMediaPresentation(mg)
+externalMediaState=Array.isArray(mg.externalMedia) ? mg.externalMedia.map(x=>({
+id:x?.id || `external-${Math.random().toString(16).slice(2)}`,
+provider:String(x?.provider || "custom"),
+name:String(x?.name || ""),
+url:String(x?.url || ""),
+embed:String(x?.embed || ""),
+thumbnail:String(x?.thumbnail || ""),
+buttonText:String(x?.buttonText || "Open Media"),
+enabled:x?.enabled===false ? false : true
+})) : []
+
+const collections=Array.isArray(mg.collections)?mg.collections:[]
+
+if(collections.length===0){
+mediaCollections=[{id:"collection-default",title:"Latest"}]
+mediaItems=[]
+hydrateMediaPresentation(mg)
+renderMediaList()
+renderExternalMediaList()
+return
+}
+
+mediaCollections=collections.map((collection,i)=>({
+id:collection?.id || (i===0 ? "collection-default" : `collection-${i}-${Math.random().toString(16).slice(2)}`),
+title:String(collection?.title || (i===0 ? "Latest" : `Collection ${i+1}`))
+}))
+
+mediaItems=[]
+
+collections.forEach((collection,i)=>{
+const collectionId=mediaCollections[i]?.id || "collection-default"
+const items=Array.isArray(collection?.items) ? collection.items : []
+
+items.forEach(x=>{
+mediaItems.push({
+id:x?.id || `item-${Math.random().toString(16).slice(2)}`,
+collectionId,
+title:String(x?.title || ""),
+description:String(x?.description || ""),
+thumbnail:String(x?.thumbnail || ""),
+url:String(x?.url || ""),
+access:"public"
+})
+})
+})
+
+ensureDefaultCollection()
+renderMediaList()
+renderExternalMediaList()
+
+}
+
+function buildMediaGateway(){
+if(!(mediaHydrated || mediaTouched)) return null
+
+ensureDefaultCollection()
+
+const collections=mediaCollections.map(collection=>{
+
+const items=mediaItems
+.filter(it=>(it.collectionId || mediaCollections[0].id)===collection.id)
+.map(it=>({
+id:it.id || `item-${Math.random().toString(16).slice(2)}`,
+title:(it.title||"").trim(),
+description:(it.description||"").trim(),
+thumbnail:(it.thumbnail||"").trim(),
+url:(it.url||"").trim(),
+access:"public"
+}))
+
+return{
+id:collection.id,
+title:(collection.title||"Latest").trim() || "Latest",
+items
+}
+
+})
+
+return{
+enabled:el.mediaEnabled.checked===true,
+collections,
+presentation:buildMediaPresentation(),
+externalMedia:externalMediaState.map(item=>({
+id:item.id || `external-${Math.random().toString(16).slice(2)}`,
+provider:(item.provider || "custom").trim() || "custom",
+name:(item.name || "").trim(),
+url:(item.url || "").trim(),
+embed:(item.embed || "").trim(),
+thumbnail:(item.thumbnail || "").trim(),
+buttonText:(item.buttonText || "Open Media").trim() || "Open Media",
+enabled:item.enabled===false ? false : true
+}))
+}
+
+}
+
+
+function inferBackgroundType(url){
+const clean=String(url || "").toLowerCase().split("?")[0]
+
+if(
+clean.endsWith(".mp4") ||
+clean.endsWith(".webm") ||
+clean.endsWith(".mov") ||
+clean.endsWith(".m4v")
+){
+return "video"
+}
+
+if(
+clean.endsWith(".jpg") ||
+clean.endsWith(".jpeg") ||
+clean.endsWith(".png") ||
+clean.endsWith(".gif") ||
+clean.endsWith(".webp") ||
+clean.endsWith(".svg")
+){
+return "image"
+}
+
+return "none"
+}
+
+function hydrateBackground(state){
+const background=state && typeof state==="object" && state.background && typeof state.background==="object"
+? state.background
+: {}
+
+const url=String(
+background.url ||
+background.image ||
+background.video ||
+state?.backgroundImage ||
+state?.backgroundVideo ||
+""
+).trim()
+
+let type=String(background.type || "").toLowerCase().trim()
+
+if(type!=="image" && type!=="video"){
+type=inferBackgroundType(url)
+}
+
+if(background.enabled===false || !url){
+type="none"
+}
+
+el.backgroundType.value=type
+el.backgroundUrl.value=url
+el.backgroundFile.value=""
+}
+
+function buildBackground(){
+const type=String(el.backgroundType.value || "none").toLowerCase().trim()
+const url=String(el.backgroundUrl.value || "").trim()
+
+if(type!=="image" && type!=="video"){
+return{
+enabled:false,
+type:"none",
+url:""
+}
+}
+
+return{
+enabled:true,
+type,
+url
+}
+}
+
+function getSafeBackgroundExtension(file,type){
+const name=String(file?.name || "")
+const ext=(name.split(".").pop() || "").toLowerCase()
+const mime=String(file?.type || "").toLowerCase()
+
+if(type==="image"){
+if(["png","jpg","jpeg","webp","gif"].includes(ext)) return ext
+if(mime==="image/png") return "png"
+if(mime==="image/jpeg") return "jpg"
+if(mime==="image/webp") return "webp"
+if(mime==="image/gif") return "gif"
+return "png"
+}
+
+if(["mp4","webm","mov","m4v"].includes(ext)) return ext
+if(mime==="video/mp4") return "mp4"
+if(mime==="video/webm") return "webm"
+if(mime==="video/quicktime") return "mov"
+
+return "mp4"
+}
+
+async function uploadBackgroundAsset(token,file,type){
+const safeType=type==="video" ? "video" : "image"
+const safeExt=getSafeBackgroundExtension(file,safeType)
+const fileName=`background-${safeType}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE background ${safeType} ${fileName}`
+)
+
+return localPath
+}
+
+async function buildBackgroundForPublish(token){
+const type=String(el.backgroundType.value || "none").toLowerCase().trim()
+
+if(type!=="image" && type!=="video"){
+el.backgroundFile.value=""
+el.backgroundUrl.value=""
+return{
+enabled:false,
+type:"none",
+url:""
+}
+}
+
+let url=String(el.backgroundUrl.value || "").trim()
+const file=el.backgroundFile.files[0] || null
+
+if(file){
+log(`Background ${type} upload started.`)
+url=await uploadBackgroundAsset(token,file,type)
+el.backgroundUrl.value=url
+el.backgroundFile.value=""
+log(`Background ${type} uploaded: ${url}`)
+}
+
+return{
+enabled:true,
+type,
+url
+}
+}
+
+
+
+function hydrateHeroMedia(state){
+const hero=state && typeof state==="object" && state.heroMedia && typeof state.heroMedia==="object"
+? state.heroMedia
+: {}
+
+let type=String(hero.type || "").toLowerCase().trim()
+const url=String(hero.url || hero.src || hero.file || "").trim()
+
+if(type!=="image" && type!=="video"){
+type=inferBackgroundType(url)
+}
+
+if(hero.enabled===false || !url){
+type="none"
+}
+
+el.heroMediaType.value=type
+el.heroMediaUrl.value=url
+el.heroMediaFile.value=""
+
+const animation=String(hero.animation || "none").toLowerCase().trim()
+el.heroMediaAnimation.value=["float","pulse","drift","flat","spin"].includes(animation) ? animation : "none"
+}
+
+function buildHeroMedia(){
+const type=String(el.heroMediaType.value || "none").toLowerCase().trim()
+const url=String(el.heroMediaUrl.value || "").trim()
+const animation=String(el.heroMediaAnimation.value || "none").toLowerCase().trim()
+
+if(type!=="image" && type!=="video"){
+return{
+enabled:false,
+type:"none",
+url:"",
+animation:["float","pulse","drift","flat","spin"].includes(animation) ? animation : "none"
+}
+}
+
+return{
+enabled:true,
+type,
+url,
+animation:["float","pulse","drift","flat","spin"].includes(animation) ? animation : "none"
+}
+}
+
+async function uploadHeroMediaAsset(token,file,type){
+const safeType=type==="video" ? "video" : "image"
+const safeExt=getSafeBackgroundExtension(file,safeType)
+const fileName=`hero-${safeType}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE hero ${safeType} ${fileName}`
+)
+
+return localPath
+}
+
+async function buildHeroMediaForPublish(token){
+const type=String(el.heroMediaType.value || "none").toLowerCase().trim()
+const animation=String(el.heroMediaAnimation.value || "none").toLowerCase().trim()
+const safeAnimation=["float","pulse","drift","flat","spin"].includes(animation) ? animation : "none"
+
+if(type!=="image" && type!=="video"){
+el.heroMediaFile.value=""
+el.heroMediaUrl.value=""
+return{
+enabled:false,
+type:"none",
+url:"",
+animation:safeAnimation
+}
+}
+
+let url=String(el.heroMediaUrl.value || "").trim()
+const file=el.heroMediaFile.files[0] || null
+
+if(file){
+log(`Hero ${type} upload started.`)
+url=await uploadHeroMediaAsset(token,file,type)
+el.heroMediaUrl.value=url
+el.heroMediaFile.value=""
+log(`Hero ${type} uploaded: ${url}`)
+}
+
+return{
+enabled:true,
+type,
+url,
+animation:safeAnimation
+}
+}
+
+function hydrateMediaPresentation(mg){
+const presentation=mg && typeof mg==="object" && mg.presentation && typeof mg.presentation==="object"
+? mg.presentation
+: {}
+
+const style=String(presentation.style || "default").toLowerCase().trim()
+el.mediaCardStyle.value=["color","image","video"].includes(style) ? style : "default"
+el.mediaCardColor.value=presentation.color || "#050505"
+el.mediaCardUrl.value=String(presentation.url || "").trim()
+el.mediaCardFile.value=""
+
+const animation=String(presentation.animation || "none").toLowerCase().trim()
+el.mediaCardAnimation.value=["float","pulse","drift"].includes(animation) ? animation : "none"
+}
+
+function buildMediaPresentation(){
+const style=String(el.mediaCardStyle.value || "default").toLowerCase().trim()
+const safeStyle=["color","image","video"].includes(style) ? style : "default"
+const animation=String(el.mediaCardAnimation.value || "none").toLowerCase().trim()
+const url=String(el.mediaCardUrl.value || "").trim()
+
+const output={
+style:safeStyle,
+color:el.mediaCardColor.value || "#050505",
+url,
+animation:["float","pulse","drift"].includes(animation) ? animation : "none"
+}
+
+if(safeStyle==="image"){
+output.image=url
+output.wallpaper=url
+output.backgroundImage=url
+}
+
+if(safeStyle==="video"){
+output.video=url
+output.backgroundVideo=url
+}
+
+return output
+}
+
+async function uploadMediaCardAsset(token,file,style){
+const safeType=style==="video" ? "video" : "image"
+const safeExt=getSafeBackgroundExtension(file,safeType)
+const fileName=`media-card-${safeType}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE media card ${safeType} ${fileName}`
+)
+
+return localPath
+}
+
+async function buildMediaPresentationForPublish(token){
+const style=String(el.mediaCardStyle.value || "default").toLowerCase().trim()
+const safeStyle=["color","image","video"].includes(style) ? style : "default"
+const animation=String(el.mediaCardAnimation.value || "none").toLowerCase().trim()
+
+let url=String(el.mediaCardUrl.value || "").trim()
+const file=el.mediaCardFile.files[0] || null
+
+if((safeStyle==="image" || safeStyle==="video") && file){
+log(`Media card ${safeStyle} upload started.`)
+url=await uploadMediaCardAsset(token,file,safeStyle)
+el.mediaCardUrl.value=url
+el.mediaCardFile.value=""
+log(`Media card ${safeStyle} uploaded: ${url}`)
+}
+
+if(safeStyle==="default" || safeStyle==="color"){
+el.mediaCardFile.value=""
+if(safeStyle==="default") url=""
+}
+
+const output={
+style:safeStyle,
+color:el.mediaCardColor.value || "#050505",
+url,
+animation:["float","pulse","drift"].includes(animation) ? animation : "none"
+}
+
+if(safeStyle==="image"){
+output.image=url
+output.wallpaper=url
+output.backgroundImage=url
+}
+
+if(safeStyle==="video"){
+output.video=url
+output.backgroundVideo=url
+}
+
+return output
+}
+
+function getPresentationSourceUrl(presentation){
+const style=String(presentation?.style || "default").toLowerCase().trim()
+
+if(style==="video"){
+return String(
+presentation?.video ||
+presentation?.backgroundVideo ||
+presentation?.url ||
+""
+).trim()
+}
+
+if(style==="image"){
+return String(
+presentation?.image ||
+presentation?.wallpaper ||
+presentation?.backgroundImage ||
+presentation?.url ||
+""
+).trim()
+}
+
+return String(presentation?.url || "").trim()
+}
+
+function hydrateInnerSurface(state){
+const source=(state && typeof state==="object" && state.innerSurface && typeof state.innerSurface==="object")
+? state.innerSurface
+: ((state && typeof state==="object" && state.innerSurfacePresentation && typeof state.innerSurfacePresentation==="object")
+? state.innerSurfacePresentation
+: {})
+
+const style=String(source.style || source.type || "default").toLowerCase().trim()
+el.innerSurfaceStyle.value=["color","image","video"].includes(style) ? style : "default"
+el.innerSurfaceColor.value=source.color || source.backgroundColor || "#050505"
+el.innerSurfaceUrl.value=getPresentationSourceUrl({
+...source,
+style:el.innerSurfaceStyle.value
+})
+el.innerSurfaceFile.value=""
+}
+
+function buildInnerSurface(){
+const style=String(el.innerSurfaceStyle.value || "default").toLowerCase().trim()
+const safeStyle=["color","image","video"].includes(style) ? style : "default"
+const color=el.innerSurfaceColor.value || "#050505"
+const url=String(el.innerSurfaceUrl.value || "").trim()
+
+const output={
+style:safeStyle,
+color:safeStyle==="default" ? "" : color,
+url:safeStyle==="default" ? "" : url
+}
+
+if(safeStyle==="image"){
+output.image=url
+output.wallpaper=url
+output.backgroundImage=url
+}
+
+if(safeStyle==="video"){
+output.video=url
+output.backgroundVideo=url
+}
+
+return output
+}
+
+async function uploadInnerSurfaceAsset(token,file,style){
+const safeType=style==="video" ? "video" : "image"
+const safeExt=getSafeBackgroundExtension(file,safeType)
+const fileName=`inner-surface-${safeType}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE inner surface ${safeType} ${fileName}`
+)
+
+return localPath
+}
+
+async function buildInnerSurfaceForPublish(token){
+const style=String(el.innerSurfaceStyle.value || "default").toLowerCase().trim()
+const safeStyle=["color","image","video"].includes(style) ? style : "default"
+let url=String(el.innerSurfaceUrl.value || "").trim()
+const file=el.innerSurfaceFile.files[0] || null
+
+if((safeStyle==="image" || safeStyle==="video") && file){
+log(`Inner surface ${safeStyle} upload started.`)
+url=await uploadInnerSurfaceAsset(token,file,safeStyle)
+el.innerSurfaceUrl.value=url
+el.innerSurfaceFile.value=""
+log(`Inner surface ${safeStyle} uploaded: ${url}`)
+}
+
+if(safeStyle==="default" || safeStyle==="color"){
+el.innerSurfaceFile.value=""
+if(safeStyle==="default") url=""
+}
+
+const output={
+style:safeStyle,
+color:safeStyle==="default" ? "" : (el.innerSurfaceColor.value || "#050505"),
+url
+}
+
+if(safeStyle==="image"){
+output.image=url
+output.wallpaper=url
+output.backgroundImage=url
+}
+
+if(safeStyle==="video"){
+output.video=url
+output.backgroundVideo=url
+}
+
+return output
+}
+
+function hydrateChime(state){
+const chime=state && typeof state==="object" && state.chime && typeof state.chime==="object"
+? state.chime
+: {}
+
+const url=String(
+chime.url ||
+chime.file ||
+chime.audio ||
+state?.chimeUrl ||
+state?.appChimeUrl ||
+""
+).trim()
+
+const volumeNumber=Number(chime.volume)
+let volume="0.65"
+
+if(!Number.isNaN(volumeNumber)){
+volume=String(Math.max(0,Math.min(1,volumeNumber)))
+}
+
+el.chimeEnabled.checked=chime.enabled===true
+el.chimeUrl.value=url
+el.chimeVolume.value=volume
+el.chimeFile.value=""
+}
+
+function buildChime(){
+const enabled=el.chimeEnabled.checked===true
+const url=String(el.chimeUrl.value || "").trim()
+const volumeNumber=Number(el.chimeVolume.value)
+const volume=Number.isNaN(volumeNumber) ? .65 : Math.max(0,Math.min(1,volumeNumber))
+
+return{
+enabled,
+url:enabled ? url : "",
+volume
+}
+}
+
+function getSafeChimeExtension(file){
+const name=String(file?.name || "")
+const ext=(name.split(".").pop() || "").toLowerCase()
+const mime=String(file?.type || "").toLowerCase()
+
+if(["mp3","m4a","wav","ogg","aac","webm"].includes(ext)) return ext
+if(mime==="audio/mpeg") return "mp3"
+if(mime==="audio/mp3") return "mp3"
+if(mime==="audio/mp4") return "m4a"
+if(mime==="audio/wav") return "wav"
+if(mime==="audio/ogg") return "ogg"
+if(mime==="audio/aac") return "aac"
+if(mime==="audio/webm") return "webm"
+
+return "mp3"
+}
+
+async function uploadChimeAsset(token,file){
+const safeExt=getSafeChimeExtension(file)
+const fileName=`chime-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE chime ${fileName}`
+)
+
+return localPath
+}
+
+async function buildChimeForPublish(token){
+const enabled=el.chimeEnabled.checked===true
+const volumeNumber=Number(el.chimeVolume.value)
+const volume=Number.isNaN(volumeNumber) ? .65 : Math.max(0,Math.min(1,volumeNumber))
+
+if(!enabled){
+el.chimeFile.value=""
+return{
+enabled:false,
+url:"",
+volume
+}
+}
+
+let url=String(el.chimeUrl.value || "").trim()
+const file=el.chimeFile.files[0] || null
+
+if(file){
+log("Chime upload started.")
+url=await uploadChimeAsset(token,file)
+el.chimeUrl.value=url
+el.chimeFile.value=""
+log(`Chime uploaded: ${url}`)
+}
+
+return{
+enabled:true,
+url,
+volume
+}
+}
+
+function previewChime(){
+let src=""
+
+const file=el.chimeFile.files[0] || null
+
+if(file){
+src=URL.createObjectURL(file)
+}else{
+src=String(el.chimeUrl.value || "").trim()
+}
+
+if(!src)return
+
+try{
+const audio=new Audio(src)
+const volumeNumber=Number(el.chimeVolume.value)
+audio.volume=Number.isNaN(volumeNumber) ? .65 : Math.max(0,Math.min(1,volumeNumber))
+audio.play()
+}catch(e){}
+}
+
+function refreshPreview(){
+
+try{
+const payload={
+name:el.name.value,
+bio:el.bio.value,
+links:linkState,
+backgroundColor:el.backgroundColor.value,
+background:buildBackground(),
+heroMedia:buildHeroMedia(),
+chime:buildChime(),
+pillColor:el.pillColor.value,
+innerSurface:buildInnerSurface(),
+contactEmail:el.contactEmail.value,
+contactLabel:el.contactLabel.value,
+live:{
+enabled:el.liveEnabled.checked===true,
+status:el.liveStatus.value==="live" ? "live" : "offline",
+watch_url:el.liveWatchUrl.value.trim(),
+description:el.liveDescription.value.trim()
+}
+}
+
+const mg=buildMediaGateway()
+if(mg) payload.mediaGateway=mg
+
+const supporters=buildSupporters()
+if(supporters) payload.supporters=supporters
+
+const community=buildCommunity()
+if(community) payload.community=community
+
+const analytics=buildAnalytics()
+if(analytics) payload.analytics=analytics
+
+el.previewFrame.contentWindow.postMessage({
+type:"BASE_PREVIEW",
+payload
+},"*")
+}catch(e){}
+
+}
+
+async function ghGetFileMeta(token,path){
+
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${ghEncodePath(path)}?ref=${BRANCH}`
+
+const res=await fetch(api,{headers:ghHeaders(token)})
+
+if(!res.ok)throw new Error(`GitHub GET failed (${res.status})`)
+
+return res.json()
+
+}
+
+async function ghPutFile(token,path,sha,contentBase64,message){
+
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${ghEncodePath(path)}`
+
+const body={
+message,
+content:contentBase64,
+branch:BRANCH
+}
+
+if(sha)body.sha=sha
+
+const res=await fetch(api,{
+method:"PUT",
+headers:ghHeaders(token),
+body:JSON.stringify(body)
+})
+
+if(!res.ok)throw new Error(`GitHub PUT failed (${res.status})`)
+
+return res.json()
+
+}
+
+async function ghListDirectory(token,path){
+
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${ghEncodePath(path)}?ref=${BRANCH}`
+const res=await fetch(api,{headers:ghHeaders(token)})
+
+if(res.status===404){
+return []
+}
+
+if(!res.ok){
+throw new Error(`GitHub directory read failed (${res.status}): ${path}`)
+}
+
+const data=await res.json()
+
+return Array.isArray(data) ? data : []
+
+}
+
+async function ghDeleteFile(token,path,sha,message){
+
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${ghEncodePath(path)}`
+
+const res=await fetch(api,{
+method:"DELETE",
+headers:ghHeaders(token),
+body:JSON.stringify({
+message,
+sha,
+branch:BRANCH
+})
+})
+
+if(!res.ok){
+throw new Error(`GitHub DELETE failed (${res.status}): ${path}`)
+}
+
+return res.json()
+
+}
+
+async function deleteDirectoryFiles(token,path,keepNames){
+
+const files=await ghListDirectory(token,path)
+const keep=new Set(Array.isArray(keepNames) ? keepNames : [])
+let deleted=0
+
+for(const file of files){
+if(file.type!=="file") continue
+if(keep.has(file.name)) continue
+
+await ghDeleteFile(
+token,
+file.path,
+file.sha,
+`BASE clean template remove ${file.path}`
+)
+
+deleted++
+}
+
+return deleted
+
+}
+
+function buildCleanTemplateContent(){
+
+return{
+name:"BASE Creator",
+bio:"",
+contactEmail:"",
+contactLabel:"Connect",
+backgroundColor:"#000000",
+background:{
+enabled:false,
+type:"none",
+url:""
+},
+heroMedia:{
+enabled:false,
+type:"none",
+url:"",
+animation:"none"
+},
+chime:{
+enabled:false,
+url:"",
+volume:0.65
+},
+pillColor:"#000000",
+innerSurface:{
+style:"default",
+color:"#050505",
+url:""
+},
+live:{
+enabled:false,
+status:"offline",
+watch_url:"",
+description:""
+},
+links:[],
+mediaGateway:{
+enabled:true,
+collections:[],
+presentation:{
+style:"default",
+color:"#050505",
+url:"",
+animation:"none"
+},
+externalMedia:[]
+},
+supporters:[],
+community:{
+enabled:false,
+provider:"custom",
+name:"",
+icon:"",
+buttonText:"Enter Community",
+url:"",
+embed:""
+},
+analytics:{
+enabled:false,
+provider:"",
+snippet:""
+}
+}
+
+}
+
+async function prepareCleanTemplate(token){
+
+log("Clean template preparation started.")
+
+const latest=await getLatestIconVersion(token)
+
+const v192Match=latest.icon192Name.match(/v(\d+)\.png$/)
+const v512Match=latest.icon512Name.match(/v(\d+)\.png$/)
+
+if(!v192Match || !v512Match){
+throw new Error("Could not parse current icon version.")
+}
+
+const newVersion=Math.max(
+parseInt(v192Match[1],10),
+parseInt(v512Match[1],10)
+)+1
+
+const icon192Name=`icon-192-v${newVersion}.png`
+const icon512Name=`icon-512-v${newVersion}.png`
+
+const base192=await makeBaseTemplateIconBase64(192)
+const base512=await makeBaseTemplateIconBase64(512)
+
+await ghPutFile(
+token,
+`Fan App/icons/${icon192Name}`,
+undefined,
+base192,
+`BASE clean template icon v${newVersion} (192)`
+)
+
+await ghPutFile(
+token,
+`Fan App/icons/${icon512Name}`,
+undefined,
+base512,
+`BASE clean template icon v${newVersion} (512)`
+)
+
+log(`Clean BASE icons created: ${icon192Name}, ${icon512Name}`)
+
+const deletedMedia=await deleteDirectoryFiles(token,"Fan App/media",[])
+log(`Fan App/media cleaned. Removed ${deletedMedia} file(s).`)
+
+const deletedIcons=await deleteDirectoryFiles(token,"Fan App/icons",[icon192Name,icon512Name])
+log(`Fan App/icons cleaned. Removed ${deletedIcons} old icon file(s).`)
+
+const manifestPath="Fan App/manifest.json"
+const manifestMeta=await ghGetFileMeta(token,manifestPath)
+
+let manifest={}
+try{
+manifest=JSON.parse(fromBase64Utf8(manifestMeta.content))
+}catch(e){
+manifest={}
+}
+
+manifest.name="BASE Creator"
+manifest.short_name="BASE"
+manifest.icons=[
+{
+src:`icons/${icon192Name}`,
+sizes:"192x192",
+type:"image/png"
+},
+{
+src:`icons/${icon512Name}`,
+sizes:"512x512",
+type:"image/png"
+}
+]
+
+await ghPutFile(
+token,
+manifestPath,
+manifestMeta.sha,
+toBase64Utf8(JSON.stringify(manifest,null,2)),
+`BASE clean template manifest v${newVersion}`
+)
+
+const cleanContent=buildCleanTemplateContent()
+const contentMeta=await ghGetFileMeta(token,TARGET_PATH)
+
+const result=await ghPutFile(
+token,
+TARGET_PATH,
+contentMeta.sha,
+toBase64Utf8(JSON.stringify(cleanContent,null,2)),
+"BASE clean template content reset"
+)
+
+const fanIndexPath="Fan App/index.html"
+const fanIndexMeta=await ghGetFileMeta(token,fanIndexPath)
+let fanIndexHtml=fromBase64Utf8(fanIndexMeta.content)
+const cacheVersion=Date.now()
+
+fanIndexHtml=fanIndexHtml.replace(
+/<title>.*?<\/title>/,
+`<title>BASE Creator</title>`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<meta name="apple-mobile-web-app-title" content=".*?">/g,
+`<meta name="apple-mobile-web-app-title" content="BASE Creator">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<meta name="application-name" content=".*?">/g,
+`<meta name="application-name" content="BASE Creator">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="manifest" href="manifest\.json(?:\?v=\d+)?">/g,
+`<link rel="manifest" href="manifest.json?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="apple-touch-icon"[^>]*>/g,
+`<link rel="apple-touch-icon" sizes="512x512" href="icons/${icon512Name}?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="shortcut icon"[^>]*>/g,
+`<link rel="shortcut icon" type="image/png" href="icons/${icon192Name}?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="icon"[^>]*>/g,
+`<link rel="icon" type="image/png" sizes="192x192" href="icons/${icon192Name}?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<img id="logo" src="icons\/[^\"]+">/g,
+`<img id="logo" src="icons/${icon192Name}?v=${cacheVersion}">`
+)
+
+await ghPutFile(
+token,
+fanIndexPath,
+fanIndexMeta.sha,
+toBase64Utf8(fanIndexHtml),
+"BASE clean template HTML sync"
+)
+
+if(result?.content?.sha){
+loadedSha=result.content.sha
+shaConflict=false
+el.lastSha.textContent=`sha: ${result.content.sha}`
+}
+
+return{
+icon192Name,
+icon512Name,
+deletedMedia,
+deletedIcons
+}
+
+}
+
+async function fileToBase64(file){
+return new Promise((resolve,reject)=>{
+const reader=new FileReader()
+reader.onload=()=>resolve(reader.result.split(",")[1])
+reader.onerror=reject
+reader.readAsDataURL(file)
+})
+}
+
+async function makeBaseTemplateIconBase64(size){
+return new Promise((resolve,reject)=>{
+const canvas=document.createElement("canvas")
+canvas.width=size
+canvas.height=size
+
+const ctx=canvas.getContext("2d")
+if(!ctx){
+reject(new Error("Icon canvas unavailable."))
+return
+}
+
+ctx.fillStyle="#050505"
+ctx.fillRect(0,0,size,size)
+
+const glow=ctx.createRadialGradient(size/2,size/2,size*0.08,size/2,size/2,size*0.46)
+glow.addColorStop(0,"#ffd84d")
+glow.addColorStop(1,"#caa300")
+ctx.fillStyle=glow
+ctx.beginPath()
+ctx.arc(size/2,size/2,size*0.38,0,Math.PI*2)
+ctx.fill()
+
+ctx.fillStyle="#050505"
+ctx.font=`900 ${Math.floor(size*0.18)}px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif`
+ctx.textAlign="center"
+ctx.textBaseline="middle"
+ctx.fillText("BASE",size/2,size/2)
+
+canvas.toBlob(blob=>{
+if(!blob){
+reject(new Error("Icon canvas export failed."))
+return
+}
+const reader=new FileReader()
+reader.onload=()=>resolve(String(reader.result).split(",")[1])
+reader.onerror=reject
+reader.readAsDataURL(blob)
+},"image/png")
+})
+}
+
+function getSafeMediaThumbExtension(file){
+const name=String(file?.name || "")
+const ext=(name.split(".").pop() || "png").toLowerCase()
+return ["png","jpg","jpeg","webp"].includes(ext) ? ext : "png"
+}
+
+function getSafeMediaExtension(file){
+const name=String(file?.name || "")
+const ext=(name.split(".").pop() || "").toLowerCase()
+const mime=String(file?.type || "").toLowerCase()
+
+if(["mp4","webm","mov","png","jpg","jpeg","webp"].includes(ext)){
+return ext
+}
+
+if(mime==="video/mp4") return "mp4"
+if(mime==="video/webm") return "webm"
+if(mime==="video/quicktime") return "mov"
+if(mime==="image/png") return "png"
+if(mime==="image/jpeg") return "jpg"
+if(mime==="image/webp") return "webp"
+
+return "mp4"
+}
+
+async function uploadMediaThumbnail(token,file,itemId){
+const safeExt=getSafeMediaThumbExtension(file)
+const safeId=String(itemId || `item-${Date.now()}`).replace(/[^a-zA-Z0-9_-]/g,"")
+const fileName=`thumb-${safeId}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE media thumbnail ${fileName}`
+)
+
+return localPath
+}
+
+async function uploadMediaFile(token,file,itemId){
+const safeExt=getSafeMediaExtension(file)
+const safeId=String(itemId || `item-${Date.now()}`).replace(/[^a-zA-Z0-9_-]/g,"")
+const fileName=`media-${safeId}-${Date.now()}.${safeExt}`
+const repoPath=`Fan App/media/${fileName}`
+const localPath=`./media/${fileName}`
+const base64=await fileToBase64(file)
+
+await ghPutFile(
+token,
+repoPath,
+undefined,
+base64,
+`BASE media file ${fileName}`
+)
+
+return localPath
+}
+
+async function buildMediaGatewayForPublish(token){
+if(!(mediaHydrated || mediaTouched)) return null
+
+ensureDefaultCollection()
+
+const collections=[]
+
+for(const collection of mediaCollections){
+
+const items=[]
+
+const scopedItems=mediaItems.filter(it=>(it.collectionId || mediaCollections[0].id)===collection.id)
+
+for(const it of scopedItems){
+
+let thumbnail=(it.thumbnail||"").trim()
+let url=(it.url||"").trim()
+
+if(it.mediaFile instanceof File){
+log(`Media upload started: ${it.title || "media item"}`)
+url=await uploadMediaFile(token,it.mediaFile,it.id)
+it.url=url
+delete it.mediaFile
+log(`Media uploaded: ${url}`)
+}
+
+if(it.thumbnailFile instanceof File){
+log(`Thumbnail upload started: ${it.title || "media item"}`)
+thumbnail=await uploadMediaThumbnail(token,it.thumbnailFile,it.id)
+it.thumbnail=thumbnail
+delete it.thumbnailFile
+log(`Thumbnail uploaded: ${thumbnail}`)
+}
+
+items.push({
+id:it.id || `item-${Math.random().toString(16).slice(2)}`,
+title:(it.title||"").trim(),
+description:(it.description||"").trim(),
+thumbnail,
+url,
+access:"public"
+})
+
+}
+
+collections.push({
+id:collection.id,
+title:(collection.title||"Latest").trim() || "Latest",
+items
+})
+
+}
+
+const externalMedia=[]
+
+for(const item of externalMediaState){
+
+let thumbnail=(item.thumbnail || "").trim()
+
+if(item.thumbnailFile instanceof File){
+log(`External media thumbnail upload started: ${item.name || "external media"}`)
+thumbnail=await uploadMediaThumbnail(token,item.thumbnailFile,item.id)
+item.thumbnail=thumbnail
+delete item.thumbnailFile
+log(`External media thumbnail uploaded: ${thumbnail}`)
+}
+
+externalMedia.push({
+id:item.id || `external-${Math.random().toString(16).slice(2)}`,
+provider:(item.provider || "custom").trim() || "custom",
+name:(item.name || "").trim(),
+url:(item.url || "").trim(),
+embed:(item.embed || "").trim(),
+thumbnail,
+buttonText:(item.buttonText || "Open Media").trim() || "Open Media",
+enabled:item.enabled===false ? false : true
+})
+
+}
+
+return{
+enabled:el.mediaEnabled.checked===true,
+collections,
+presentation:await buildMediaPresentationForPublish(token),
+externalMedia
+}
+
+}
+
+async function getLatestIconVersion(token){
+const folderPath="Fan App/icons"
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${ghEncodePath(folderPath)}?ref=${BRANCH}`
+const res=await fetch(api,{headers:ghHeaders(token)})
+
+if(!res.ok) throw new Error(`GitHub icons folder read failed (${res.status})`)
+
+const files=await res.json()
+
+let latest192=null
+let latest512=null
+
+files.forEach(file=>{
+const name=String(file?.name || "")
+
+const match192=name.match(/^icon-192-v(\d+)\.png$/)
+const match512=name.match(/^icon-512-v(\d+)\.png$/)
+
+if(match192){
+const v=parseInt(match192[1],10)
+if(!latest192 || v>latest192.v){
+latest192={v,name}
+}
+}
+
+if(match512){
+const v=parseInt(match512[1],10)
+if(!latest512 || v>latest512.v){
+latest512={v,name}
+}
+}
+})
+
+if(!latest192 || !latest512){
+throw new Error("Versioned icons not found in Fan App/icons")
+}
+
+return{
+icon192Path:`Fan App/icons/${latest192.name}`,
+icon512Path:`Fan App/icons/${latest512.name}`,
+icon192Name:latest192.name,
+icon512Name:latest512.name
+}
+}
+
+async function getBaseIconVersion(token){
+const folderPath="Fan App/icons"
+const api=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${ghEncodePath(folderPath)}?ref=${BRANCH}`
+const res=await fetch(api,{headers:ghHeaders(token)})
+
+if(!res.ok) throw new Error(`GitHub icons folder read failed (${res.status})`)
+
+const files=await res.json()
+
+let base192=null
+let base512=null
+
+files.forEach(file=>{
+const name=String(file?.name || "")
+
+const match192=name.match(/^icon-192-v(\d+)\.png$/)
+const match512=name.match(/^icon-512-v(\d+)\.png$/)
+
+if(match192){
+const v=parseInt(match192[1],10)
+if(!base192 || v<base192.v){
+base192={v,name}
+}
+}
+
+if(match512){
+const v=parseInt(match512[1],10)
+if(!base512 || v<base512.v){
+base512={v,name}
+}
+}
+})
+
+if(!base192 || !base512){
+throw new Error("Base versioned icons not found in Fan App/icons")
+}
+
+return{
+icon192Path:`Fan App/icons/${base192.name}`,
+icon512Path:`Fan App/icons/${base512.name}`,
+icon192Name:base192.name,
+icon512Name:base512.name
+}
+}
+
+async function updateAppIcon(){
+
+try{
+
+const file=el.appIconInput.files[0]
+
+if(!file){
+setPill("bad","STATUS: icon file required")
+log("Icon update blocked: no file selected.")
+return
+}
+
+const token=(el.token.value||"").trim()
+
+if(!token){
+setPill("bad","STATUS: token required")
+log("Icon update blocked: missing creator key.")
+return
+}
+
+setPill("warn","STATUS: uploading icon…")
+log("Icon upload started.")
+
+const base64=await fileToBase64(file)
+
+const latest=await getLatestIconVersion(token)
+
+const v192Match=latest.icon192Name.match(/v(\d+)\.png$/)
+const v512Match=latest.icon512Name.match(/v(\d+)\.png$/)
+
+if(!v192Match || !v512Match){
+throw new Error("Could not parse current icon version.")
+}
+
+const newVersion=Math.max(
+parseInt(v192Match[1],10),
+parseInt(v512Match[1],10)
+)+1
+
+const new192Name=`icon-192-v${newVersion}.png`
+const new512Name=`icon-512-v${newVersion}.png`
+const new192Path=`Fan App/icons/${new192Name}`
+const new512Path=`Fan App/icons/${new512Name}`
+
+await ghPutFile(
+token,
+new192Path,
+undefined,
+base64,
+`BASE icon v${newVersion} (192)`
+)
+
+await ghPutFile(
+token,
+new512Path,
+undefined,
+base64,
+`BASE icon v${newVersion} (512)`
+)
+
+const manifestPath="Fan App/manifest.json"
+const manifestMeta=await ghGetFileMeta(token,manifestPath)
+
+let manifest={}
+try{
+manifest=JSON.parse(fromBase64Utf8(manifestMeta.content))
+}catch(e){
+manifest={}
+}
+
+manifest.icons=[
+{
+src:`icons/${new192Name}`,
+sizes:"192x192",
+type:"image/png"
+},
+{
+src:`icons/${new512Name}`,
+sizes:"512x512",
+type:"image/png"
+}
+]
+
+await ghPutFile(
+token,
+manifestPath,
+manifestMeta.sha,
+toBase64Utf8(JSON.stringify(manifest,null,2)),
+`BASE manifest icon v${newVersion}`
+)
+
+const fanIndexPath="Fan App/index.html"
+const fanIndexMeta=await ghGetFileMeta(token,fanIndexPath)
+let fanIndexHtml=fromBase64Utf8(fanIndexMeta.content)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="apple-touch-icon" href="icons\/icon-512-v\d+\.png(?:\?v=\d+)?">/g,
+`<link rel="apple-touch-icon" href="icons/${new512Name}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="shortcut icon" href="icons\/icon-192-v\d+\.png(?:\?v=\d+)?">/g,
+`<link rel="shortcut icon" href="icons/${new192Name}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="icon" href="icons\/icon-192-v\d+\.png(?:\?v=\d+)?">/g,
+`<link rel="icon" href="icons/${new192Name}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<img id="logo" src="icons\/icon-192-v\d+\.png(?:\?v=\d+)?">/g,
+`<img id="logo" src="icons/${new192Name}">`
+)
+
+await ghPutFile(
+token,
+fanIndexPath,
+fanIndexMeta.sha,
+toBase64Utf8(fanIndexHtml),
+`BASE fan app icon sync v${newVersion}`
+)
+
+setPill("ok","STATUS: icon updated")
+log(`App icon updated successfully → v${newVersion}`)
+
+}catch(e){
+
+setPill("bad","STATUS: icon failed")
+log(e.message)
+
+}
+
+}
+
+
+el.btnAddSupporter.onclick=()=>{
+const type=(el.supporterType.value||"supporter").trim() || "supporter"
+const name=(el.supporterName.value||"").trim()
+const tagline=(el.supporterTagline.value||"").trim()
+const buttonText=(el.supporterButtonText.value||"").trim()
+const description=(el.supporterDesc.value||"").trim()
+const thumbnail=(el.supporterThumbnail.value||"").trim()
+const thumbnailFile=el.supporterThumbFile.files[0] || null
+const url=(el.supporterUrl.value||"").trim()
+const enabled=el.supporterEnabled.checked===true
+
+supporterState.push({
+id:`supporter-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+type,
+name,
+tagline,
+description,
+thumbnail,
+thumbnailFile,
+url,
+buttonText:buttonText || "Visit Supporter",
+enabled
+})
+
+supportersTouched=true
+
+el.supporterType.value="supporter"
+el.supporterName.value=""
+el.supporterTagline.value=""
+el.supporterButtonText.value=""
+el.supporterDesc.value=""
+el.supporterThumbFile.value=""
+el.supporterThumbnail.value=""
+el.supporterUrl.value=""
+el.supporterEnabled.checked=true
+
+renderSupporters()
+markDirty()
+}
+
+el.btnClearSupporters.onclick=()=>{
+supporterState=[]
+supportersTouched=true
+renderSupporters()
+markDirty()
+}
+
+el.addLinkBtn.onclick=()=>{
+const label=(el.linkLabelInput.value||"").trim()
+const url=(el.linkUrlInput.value||"").trim()
+
+if(!url)return
+
+linkState.push({label:label||url,url})
+
+el.linkLabelInput.value=""
+el.linkUrlInput.value=""
+
+renderLinks()
+markDirty()
+}
+
+el.clearLinksBtn.onclick=()=>{
+linkState=[]
+renderLinks()
+markDirty()
+}
+
+el.btnAddCollection.onclick=()=>{
+const title=(el.mediaCollectionTitle.value||"").trim()
+
+if(!title)return
+
+ensureDefaultCollection()
+
+const collection={
+id:makeCollectionId(),
+title
+}
+
+mediaCollections.push(collection)
+
+el.mediaCollectionTitle.value=""
+mediaTouched=true
+renderMediaList()
+el.mediaCollectionSelect.value=collection.id
+markDirty()
+}
+
+el.btnRemoveCollection.onclick=()=>{
+ensureDefaultCollection()
+
+const selected=el.mediaCollectionSelect.value
+
+if(mediaCollections.length<=1){
+log("At least one media collection is required.")
+return
+}
+
+const fallback=mediaCollections.find(c=>c.id!==selected)
+
+if(!fallback)return
+
+mediaItems=mediaItems.map(item=>{
+if((item.collectionId || mediaCollections[0].id)===selected){
+return{
+...item,
+collectionId:fallback.id
+}
+}
+return item
+})
+
+mediaCollections=mediaCollections.filter(c=>c.id!==selected)
+
+mediaTouched=true
+renderMediaList()
+el.mediaCollectionSelect.value=fallback.id
+markDirty()
+}
+
+el.btnAddMedia.onclick=()=>{
+ensureDefaultCollection()
+
+const title=(el.mediaTitle.value||"").trim()
+const url=(el.mediaUrl.value||"").trim()
+const mediaFile=el.mediaFile.files[0] || null
+const thumbnail=(el.mediaThumb.value||"").trim()
+const thumbnailFile=el.mediaThumbFile.files[0] || null
+const description=(el.mediaDesc.value||"").trim()
+const collectionId=el.mediaCollectionSelect.value || mediaCollections[0].id
+
+if(!title)return
+
+mediaItems.push({
+id:`item-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+collectionId,
+title,
+description,
+thumbnail,
+thumbnailFile,
+mediaFile,
+url,
+access:"public"
+})
+
+mediaTouched=true
+
+el.mediaTitle.value=""
+el.mediaUrl.value=""
+el.mediaFile.value=""
+el.mediaThumb.value=""
+el.mediaThumbFile.value=""
+el.mediaDesc.value=""
+
+renderMediaList()
+el.mediaCollectionSelect.value=collectionId
+markDirty()
+}
+
+el.btnClearMedia.onclick=()=>{
+mediaItems=[]
+mediaTouched=true
+renderMediaList()
+markDirty()
+}
+
+el.btnAddExternalMedia.onclick=()=>{
+const provider=(el.externalMediaProvider.value || "custom").trim() || "custom"
+const name=(el.externalMediaName.value || "").trim()
+const url=(el.externalMediaUrl.value || "").trim()
+const embed=(el.externalMediaEmbed.value || "").trim()
+const thumbnail=(el.externalMediaThumbnail.value || "").trim()
+const thumbnailFile=el.externalMediaThumbFile.files[0] || null
+const buttonText=(el.externalMediaButtonText.value || "").trim() || "Open Media"
+const enabled=el.externalMediaEnabled.checked===true
+
+if(!name && !url && !embed)return
+
+externalMediaState.push({
+id:`external-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+provider,
+name,
+url,
+embed,
+thumbnail,
+thumbnailFile,
+buttonText,
+enabled
+})
+
+mediaTouched=true
+
+el.externalMediaProvider.value="custom"
+el.externalMediaName.value=""
+el.externalMediaUrl.value=""
+el.externalMediaEmbed.value=""
+el.externalMediaThumbFile.value=""
+el.externalMediaThumbnail.value=""
+el.externalMediaButtonText.value=""
+el.externalMediaEnabled.checked=true
+
+renderExternalMediaList()
+markDirty()
+}
+
+el.btnClearExternalMedia.onclick=()=>{
+externalMediaState=[]
+mediaTouched=true
+renderExternalMediaList()
+markDirty()
+}
+
+el.btnLoad.onclick=async()=>{
+
+try{
+
+applyRepository()
+
+setPill("warn","STATUS: loading…")
+
+const state=await fetchState()
+
+el.name.value=state.name||""
+el.bio.value=state.bio||""
+el.contactEmail.value=state.contactEmail||""
+el.contactLabel.value=state.contactLabel||""
+el.liveEnabled.checked=state.live?.enabled===true
+el.liveStatus.value=(state.live?.status==="live") ? "live" : "offline"
+el.liveWatchUrl.value=state.live?.watch_url||""
+el.liveDescription.value=state.live?.description||""
+el.backgroundColor.value=state.backgroundColor||"#000000"
+hydrateBackground(state)
+hydrateHeroMedia(state)
+hydrateChime(state)
+el.pillColor.value=state.pillColor||"#caa300"
+hydrateInnerSurface(state)
+linkState=Array.isArray(state.links)?state.links:[]
+hydrateMediaGateway(state)
+hydrateSupporters(state)
+hydrateCommunity(state)
+hydrateAnalytics(state)
+
+renderLinks()
+
+hasLoadedState=true
+clearDirty()
+await syncLoadedSha()
+
+setPill("warn","STATUS: loaded")
+localStorage.setItem(LS_CONTENT_URL,(el.contentUrl.value||"").trim())
+log("Loaded current state.")
+
+}catch(e){
+
+setPill("bad","STATUS: load failed")
+log(e.message)
+
+}
+
+}
+
+
+el.btnPrepareCleanTemplate.onclick=async()=>{
+
+if(isPublishing){
+log("Clean template blocked: publish already in progress.")
+return
+}
+
+const token=(el.token.value||"").trim()
+
+if(!token){
+setPill("bad","STATUS: token required")
+log("Clean template blocked: missing creator key.")
+return
+}
+
+const confirmClean=window.confirm(
+"Prepare clean BASE template?\n\nThis will remove creator media from Fan App/media, remove old icons from Fan App/icons, reset content.json, and keep only fresh BASE template icons."
+)
+
+if(!confirmClean){
+log("Clean template cancelled.")
+return
+}
+
+try{
+
+setPublishBusy(true)
+setPill("warn","STATUS: cleaning template…")
+
+const result=await prepareCleanTemplate(token)
+
+appIconResetRequested=false
+el.appIconInput.value=""
+
+linkState=[]
+mediaItems=[]
+mediaCollections=[]
+externalMediaState=[]
+supporterState=[]
+mediaHydrated=true
+mediaTouched=false
+supportersHydrated=true
+supportersTouched=false
+communityHydrated=true
+communityTouched=false
+analyticsHydrated=true
+analyticsTouched=false
+
+renderLinks()
+renderMediaList()
+renderSupporters()
+
+clearDirty()
+setPill("ok","STATUS: clean template ready")
+log(`Clean template ready. Media removed: ${result.deletedMedia}. Old icons removed: ${result.deletedIcons}.`)
+
+}catch(e){
+
+setPill("bad","STATUS: clean failed")
+log(e.message)
+
+}finally{
+
+setPublishBusy(false)
+
+}
+
+}
+
+el.btnPublish.onclick=async()=>{
+
+if(isPublishing){
+log("Publish blocked: publish already in progress.")
+return
+}
+
+const token=(el.token.value||"").trim()
+
+if(!token){
+setPill("bad","STATUS: token required")
+log("Publish blocked: missing creator key.")
+enablePublishIfReady()
+return
+}
+
+if(!isDirty){
+log("Publish blocked: no changes to publish.")
+enablePublishIfReady()
+return
+}
+
+if(!loadedSha){
+setPill("bad","STATUS: sha required")
+log("Publish blocked: missing loaded SHA. Reload current state.")
+enablePublishIfReady()
+return
+}
+
+if(shaConflict){
+setPill("bad","STATUS: remote changed")
+log("Publish blocked: remote content changed. Reload current state.")
+enablePublishIfReady()
+return
+}
+
+try{
+
+setPublishBusy(true)
+setPill("warn","STATUS: publishing…")
+log("Publish started.")
+
+let icon192Name=null
+let icon512Name=null
+
+const iconFile=el.appIconInput.files[0]
+
+const meta=await ghGetFileMeta(token,TARGET_PATH)
+
+if(!meta?.sha){
+throw new Error("GitHub SHA missing.")
+}
+
+if(meta.sha !== loadedSha){
+shaConflict=true
+el.lastSha.textContent=`sha: ${meta.sha}`
+setPill("bad","STATUS: remote changed")
+log("Publish blocked: remote content changed. Reload current state.")
+enablePublishIfReady()
+return
+}
+
+let existing={}
+try{
+existing=JSON.parse(fromBase64Utf8(meta.content))
+}catch(e){
+existing={}
+}
+
+if(iconFile){
+appIconResetRequested=false
+log("Icon detected. Publish will update icons, manifest, and fan app HTML together.")
+
+const base64=await fileToBase64(iconFile)
+
+const latest=await getLatestIconVersion(token)
+
+const v192Match=latest.icon192Name.match(/v(\d+)\.png$/)
+const v512Match=latest.icon512Name.match(/v(\d+)\.png$/)
+
+if(!v192Match || !v512Match){
+throw new Error("Could not parse current icon version.")
+}
+
+const newVersion=Math.max(
+parseInt(v192Match[1],10),
+parseInt(v512Match[1],10)
+)+1
+
+icon192Name=`icon-192-v${newVersion}.png`
+icon512Name=`icon-512-v${newVersion}.png`
+
+await ghPutFile(
+token,
+`Fan App/icons/${icon192Name}`,
+undefined,
+base64,
+`BASE icon v${newVersion} (192)`
+)
+
+await ghPutFile(
+token,
+`Fan App/icons/${icon512Name}`,
+undefined,
+base64,
+`BASE icon v${newVersion} (512)`
+)
+
+const manifestPath="Fan App/manifest.json"
+const manifestMeta=await ghGetFileMeta(token,manifestPath)
+
+let manifest={}
+try{
+manifest=JSON.parse(fromBase64Utf8(manifestMeta.content))
+}catch(e){
+manifest={}
+}
+
+manifest.icons=[
+{
+src:`icons/${icon192Name}`,
+sizes:"192x192",
+type:"image/png"
+},
+{
+src:`icons/${icon512Name}`,
+sizes:"512x512",
+type:"image/png"
+}
+]
+
+await ghPutFile(
+token,
+manifestPath,
+manifestMeta.sha,
+toBase64Utf8(JSON.stringify(manifest,null,2)),
+`BASE manifest icon v${newVersion}`
+)
+
+}else if(appIconResetRequested){
+log("App icon reset detected. Publish will create a clean BASE template icon.")
+
+const latest=await getLatestIconVersion(token)
+
+const v192Match=latest.icon192Name.match(/v(\d+)\.png$/)
+const v512Match=latest.icon512Name.match(/v(\d+)\.png$/)
+
+if(!v192Match || !v512Match){
+throw new Error("Could not parse current icon version.")
+}
+
+const newVersion=Math.max(
+parseInt(v192Match[1],10),
+parseInt(v512Match[1],10)
+)+1
+
+icon192Name=`icon-192-v${newVersion}.png`
+icon512Name=`icon-512-v${newVersion}.png`
+
+const base192=await makeBaseTemplateIconBase64(192)
+const base512=await makeBaseTemplateIconBase64(512)
+
+await ghPutFile(
+token,
+`Fan App/icons/${icon192Name}`,
+undefined,
+base192,
+`BASE template icon reset v${newVersion} (192)`
+)
+
+await ghPutFile(
+token,
+`Fan App/icons/${icon512Name}`,
+undefined,
+base512,
+`BASE template icon reset v${newVersion} (512)`
+)
+
+const manifestPath="Fan App/manifest.json"
+const manifestMeta=await ghGetFileMeta(token,manifestPath)
+
+let manifest={}
+try{
+manifest=JSON.parse(fromBase64Utf8(manifestMeta.content))
+}catch(e){
+manifest={}
+}
+
+manifest.icons=[
+{
+src:`icons/${icon192Name}`,
+sizes:"192x192",
+type:"image/png"
+},
+{
+src:`icons/${icon512Name}`,
+sizes:"512x512",
+type:"image/png"
+}
+]
+
+await ghPutFile(
+token,
+manifestPath,
+manifestMeta.sha,
+toBase64Utf8(JSON.stringify(manifest,null,2)),
+`BASE manifest template icon reset v${newVersion}`
+)
+
+}else{
+const latest=await getLatestIconVersion(token)
+icon192Name=latest.icon192Name
+icon512Name=latest.icon512Name
+}
+
+const merged={
+...existing,
+name:el.name.value.trim(),
+bio:el.bio.value.trim(),
+contactEmail:el.contactEmail.value.trim(),
+contactLabel:el.contactLabel.value.trim(),
+live:{
+enabled:el.liveEnabled.checked===true,
+status:el.liveStatus.value==="live" ? "live" : "offline",
+watch_url:el.liveWatchUrl.value.trim(),
+description:el.liveDescription.value.trim()
+},
+links:linkState,
+backgroundColor:el.backgroundColor.value,
+background:await buildBackgroundForPublish(token),
+heroMedia:await buildHeroMediaForPublish(token),
+chime:await buildChimeForPublish(token),
+pillColor:el.pillColor.value,
+innerSurface:await buildInnerSurfaceForPublish(token)
+}
+
+const mg=await buildMediaGatewayForPublish(token)
+if(mg){
+merged.mediaGateway=mg
+}
+
+const supporters=await buildSupportersForPublish(token)
+if(supporters){
+merged.supporters=supporters
+}
+
+const community=await buildCommunityForPublish(token)
+if(community){
+merged.community=community
+}
+
+const analytics=buildAnalytics()
+if(analytics){
+merged.analytics=analytics
+}
+
+const result=await ghPutFile(
+token,
+TARGET_PATH,
+meta.sha,
+toBase64Utf8(JSON.stringify(merged,null,2)),
+"BASE publish"
+)
+
+const fanIndexPath="Fan App/index.html"
+const fanIndexMeta=await ghGetFileMeta(token,fanIndexPath)
+let fanIndexHtml=fromBase64Utf8(fanIndexMeta.content)
+
+const appName=escapeHtml(el.name.value.trim() || "App")
+const cacheVersion=Date.now()
+
+fanIndexHtml=fanIndexHtml.replace(
+/<title>.*?<\/title>/,
+`<title>${appName}</title>`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<meta name="apple-mobile-web-app-title" content=".*?">/g,
+`<meta name="apple-mobile-web-app-title" content="${appName}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<meta name="application-name" content=".*?">/g,
+`<meta name="application-name" content="${appName}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="manifest" href="manifest\.json(?:\?v=\d+)?">/g,
+`<link rel="manifest" href="manifest.json?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="apple-touch-icon"[^>]*>/g,
+`<link rel="apple-touch-icon" sizes="512x512" href="icons/${icon512Name}?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="shortcut icon"[^>]*>/g,
+`<link rel="shortcut icon" type="image/png" href="icons/${icon192Name}?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<link rel="icon"[^>]*>/g,
+`<link rel="icon" type="image/png" sizes="192x192" href="icons/${icon192Name}?v=${cacheVersion}">`
+)
+
+fanIndexHtml=fanIndexHtml.replace(
+/<img id="logo" src="icons\/[^"]+">/g,
+`<img id="logo" src="icons/${icon192Name}?v=${cacheVersion}">`
+)
+
+await ghPutFile(
+token,
+fanIndexPath,
+fanIndexMeta.sha,
+toBase64Utf8(fanIndexHtml),
+"BASE HTML sync"
+)
+
+if(result?.content?.sha){
+loadedSha=result.content.sha
+shaConflict=false
+el.lastSha.textContent=`sha: ${result.content.sha}`
+}
+
+el.appIconInput.value=""
+appIconResetRequested=false
+
+clearDirty()
+setPill("ok","STATUS: published")
+log("Publish success.")
+
+}catch(e){
+
+setPill("bad","STATUS: publish failed")
+log(e.message)
+
+}finally{
+
+setPublishBusy(false)
+
+}
+
+}
+
+el.repository.addEventListener("input",()=>{
+
+const repository=(el.repository.value||"").trim()
+
+if(repository){
+localStorage.setItem(LS_REPOSITORY,repository)
+}else{
+localStorage.removeItem(LS_REPOSITORY)
+OWNER=""
+REPO=""
+el.repoLabel.textContent=`—@${BRANCH}`
+clearShaState()
+}
+
+})
+
+el.token.addEventListener("input",async()=>{
+const t=(el.token.value||"").trim()
+
+if(t){
+localStorage.setItem(LS_TOKEN,t)
+}else{
+localStorage.removeItem(LS_TOKEN)
+}
+
+if(hasLoadedState){
+await syncLoadedSha()
+}else{
+enablePublishIfReady()
+}
+})
+
+el.btnResetToken.addEventListener("click",()=>{
+localStorage.removeItem(LS_TOKEN)
+el.token.value=""
+hasLoadedState=false
+clearDirty()
+clearShaState()
+setPublishBusy(false)
+setPill("warn","STATUS: ready")
+log("Creator key reset.")
+refreshPreview()
+})
+
+el.name.addEventListener("input",markDirty)
+el.bio.addEventListener("input",markDirty)
+el.contactEmail.addEventListener("input",markDirty)
+el.contactLabel.addEventListener("input",markDirty)
+el.liveEnabled.addEventListener("change",markDirty)
+el.liveStatus.addEventListener("change",markDirty)
+el.liveWatchUrl.addEventListener("input",markDirty)
+el.liveDescription.addEventListener("input",markDirty)
+el.backgroundColor.addEventListener("input",markDirty)
+el.backgroundType.addEventListener("change",markDirty)
+el.backgroundFile.addEventListener("change",markDirty)
+el.backgroundUrl.addEventListener("input",markDirty)
+el.chimeEnabled.addEventListener("change",markDirty)
+el.chimeFile.addEventListener("change",markDirty)
+el.chimeUrl.addEventListener("input",markDirty)
+el.chimeVolume.addEventListener("input",markDirty)
+el.btnPreviewChime.onclick=previewChime
+el.btnClearChime.onclick=()=>{
+el.chimeEnabled.checked=false
+el.chimeFile.value=""
+el.chimeUrl.value=""
+el.chimeVolume.value="0.65"
+markDirty()
+}
+el.pillColor.addEventListener("input",markDirty)
+el.innerSurfaceStyle.addEventListener("change",markDirty)
+el.innerSurfaceColor.addEventListener("input",markDirty)
+el.innerSurfaceFile.addEventListener("change",markDirty)
+el.innerSurfaceUrl.addEventListener("input",markDirty)
+el.appIconInput.addEventListener("change",()=>{
+appIconResetRequested=false
+markDirty()
+})
+el.btnClearAppIcon.onclick=()=>{
+el.appIconInput.value=""
+appIconResetRequested=true
+markDirty()
+log("App icon reset staged for publish.")
+}
+el.heroMediaType.addEventListener("change",markDirty)
+el.heroMediaFile.addEventListener("change",markDirty)
+el.heroMediaUrl.addEventListener("input",markDirty)
+el.heroMediaAnimation.addEventListener("change",markDirty)
+
+el.supporterType.addEventListener("change",()=>{supportersTouched=true;markDirty()})
+el.supporterName.addEventListener("input",()=>{supportersTouched=true;markDirty()})
+el.supporterTagline.addEventListener("input",()=>{supportersTouched=true;markDirty()})
+el.supporterButtonText.addEventListener("input",()=>{supportersTouched=true;markDirty()})
+el.supporterDesc.addEventListener("input",()=>{supportersTouched=true;markDirty()})
+el.supporterThumbnail.addEventListener("input",()=>{supportersTouched=true;markDirty()})
+el.supporterUrl.addEventListener("input",()=>{supportersTouched=true;markDirty()})
+el.supporterEnabled.addEventListener("change",()=>{supportersTouched=true;markDirty()})
+el.supporterThumbFile.addEventListener("change",()=>{supportersTouched=true;markDirty()})
+
+el.btnAddCommunity.onclick=()=>{
+communityTouched=true
+markDirty()
+log("Community staged for publish.")
+}
+
+el.btnClearCommunity.onclick=()=>{
+el.communityEnabled.checked=false
+el.communityProvider.value="custom"
+el.communityName.value=""
+el.communityIcon.value=""
+el.communityIconFile.value=""
+el.communityButtonText.value="Enter Community"
+el.communityUrl.value=""
+el.communityEmbed.value=""
+communityTouched=true
+markDirty()
+log("Community removed from publish state.")
+}
+
+el.communityEnabled.addEventListener("change",()=>{communityTouched=true;markDirty()})
+el.communityProvider.addEventListener("change",()=>{communityTouched=true;markDirty()})
+el.communityName.addEventListener("input",()=>{communityTouched=true;markDirty()})
+el.communityIcon.addEventListener("input",()=>{communityTouched=true;markDirty()})
+el.communityIconFile.addEventListener("change",()=>{communityTouched=true;markDirty()})
+el.communityButtonText.addEventListener("input",()=>{communityTouched=true;markDirty()})
+el.communityUrl.addEventListener("input",()=>{communityTouched=true;markDirty()})
+el.communityEmbed.addEventListener("input",()=>{communityTouched=true;markDirty()})
+
+el.analyticsEnabled.addEventListener("change",()=>{analyticsTouched=true;markDirty()})
+el.analyticsProvider.addEventListener("input",()=>{analyticsTouched=true;markDirty()})
+el.analyticsConfig.addEventListener("input",()=>{analyticsTouched=true;markDirty()})
+
+el.mediaEnabled.addEventListener("change",()=>{
+mediaTouched=true
+markDirty()
+})
+
+el.mediaCollectionSelect.addEventListener("change",()=>{
+renderMediaList()
+})
+
+el.mediaCollectionTitle.addEventListener("input",()=>{
+mediaTouched=true
+markDirty()
+})
+
+el.externalMediaEnabled.addEventListener("change",()=>{mediaTouched=true;markDirty()})
+el.externalMediaProvider.addEventListener("change",()=>{mediaTouched=true;markDirty()})
+el.externalMediaName.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.externalMediaUrl.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.externalMediaEmbed.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.externalMediaThumbFile.addEventListener("change",()=>{mediaTouched=true;markDirty()})
+el.externalMediaThumbnail.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.externalMediaButtonText.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.mediaCardStyle.addEventListener("change",()=>{mediaTouched=true;markDirty()})
+el.mediaCardColor.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.mediaCardFile.addEventListener("change",()=>{mediaTouched=true;markDirty()})
+el.mediaCardUrl.addEventListener("input",()=>{mediaTouched=true;markDirty()})
+el.mediaCardAnimation.addEventListener("change",()=>{mediaTouched=true;markDirty()})
+
+el.previewFrame.addEventListener("load",()=>{
+refreshPreview()
+})
+
+function initModules(){
+
+document.querySelectorAll(".moduleToggle").forEach(btn=>{
+btn.addEventListener("click",()=>{
+const block=btn.closest(".moduleBlock")
+if(block){
+block.classList.toggle("open")
+}
+})
+})
+
+}
+
+function init(){
+
+initModules()
+
+const savedRepository=(localStorage.getItem(LS_REPOSITORY)||"").trim()
+el.repository.value=savedRepository
+
+if(savedRepository){
+const parts=savedRepository.split("/")
+if(parts.length===2 && parts[0].trim() && parts[1].trim()){
+OWNER=parts[0].trim()
+REPO=parts[1].trim()
+el.repoLabel.textContent=`${OWNER}/${REPO}@${BRANCH}`
+}else{
+OWNER=""
+REPO=""
+el.repoLabel.textContent=`—@${BRANCH}`
+}
+}else{
+OWNER=""
+REPO=""
+el.repoLabel.textContent=`—@${BRANCH}`
+}
+
+const savedContentUrl=(localStorage.getItem(LS_CONTENT_URL)||"").trim()
+el.contentUrl.value=savedContentUrl || DEFAULT_CONTENT_URL
+
+const saved=(localStorage.getItem(LS_TOKEN)||"").trim()
+if(saved){
+el.token.value=saved
+localStorage.setItem(LS_TOKEN,saved)
+}else{
+localStorage.removeItem(LS_TOKEN)
+}
+
+ensureDefaultCollection()
+renderLinks()
+renderMediaList()
+renderExternalMediaList()
+renderSupporters()
+hydrateCommunity({})
+hydrateAnalytics({})
+hydrateBackground({})
+hydrateChime({})
+communityHydrated=false
+communityTouched=false
+analyticsHydrated=false
+analyticsTouched=false
+setPublishBusy(false)
+clearDirty()
+clearShaState()
+refreshPreview()
+
+}
+
+document.querySelectorAll(".dashboardTab").forEach(tab=>{
+tab.addEventListener("click",()=>{
+const page=tab.dataset.page
+
+document.querySelectorAll(".dashboardTab").forEach(x=>{
+x.classList.toggle("active",x===tab)
+})
+
+document.querySelectorAll(".page").forEach(x=>{
+x.classList.remove("active")
+})
+
+const target=document.getElementById(`page-${page}`)
+if(target){
+target.classList.add("active")
+}
+})
+})
+
+init()
+
+</script>
+<div style="text-align:center; font-size:11px; opacity:0.5; margin-top:40px;">
+  Powered by BASE
+</div>
+</body>
+</html>
