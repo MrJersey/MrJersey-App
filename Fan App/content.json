@@ -52,13 +52,13 @@
   },
   "supporters": [],
   "community": {
-    "enabled": false,
+    "enabled": true,
     "provider": "custom",
-    "name": "",
-    "icon": "",
+    "name": "🗣️",
+    "icon": "./media/community-icon-1790359997646.png",
     "buttonText": "Enter Community",
     "url": "",
-    "embed": ""
+    "embed": "<iframe src=\"https://organizations.minnit.chat/646855509780948/c/Main?embed\" style=\"border:none; width:90%; height:500px; max-height:90vh;\" allowTransparency=\"true\" data-minnitchatembed=\"1\"></iframe><p class=\"powered-by-minnit\"><a href=\"https://minnit.chat\" target=\"_blank\">Embed a chatroom on your website for free with Minnit Chat</a></p>"
   },
   "analytics": {
     "enabled": false,
