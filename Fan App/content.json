@@ -5,9 +5,9 @@
   "contactLabel": "Email",
   "backgroundColor": "#000000",
   "background": {
-    "enabled": false,
-    "type": "none",
-    "url": ""
+    "enabled": true,
+    "type": "image",
+    "url": "./media/background-image-1790358655483.png"
   },
   "heroMedia": {
     "enabled": true,
@@ -20,7 +20,7 @@
     "url": "",
     "volume": 0.65
   },
-  "pillColor": "#000000",
+  "pillColor": "#e32400",
   "innerSurface": {
     "style": "default",
     "color": "",
